@@ -28,6 +28,8 @@ typedef LanguageConfig = {
 
 ```
 
+for consonants and vowels see [Consts.hx](src/dropecho/langgen/Consts.hx)
+
 syllable_structure is a string representing the syllable so
 - "CVC" means a syllable must have a consonant vowel consonant.
 - "CVV?C" means a syllable must have a consonant vowel optional vowel consonant. 
