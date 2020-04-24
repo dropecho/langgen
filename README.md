@@ -1,6 +1,8 @@
 # Naming language generator
 
-This is code for generating a 'naming language', using the algorithm behind [@unchartedatlas][uncharted]. For more details, see [these notes][notes].
+This is code for generating a 'naming language', using the algorithm behind [@unchartedatlas][uncharted]. 
+
+For more details, see [these notes][notes].
 
 [uncharted]: https://twitter.com/unchartedatlas
 [notes]: http://mewo2.com/notes/naming-language/
@@ -27,13 +29,12 @@ typedef LanguageConfig = {
 ```
 
 syllable_structure is a string representing the syllable so
-"CVC" means a syllable must have a consonant vowel consonant.
-"CVV?C" means a syllable must have a consonant vowel optional vowel consonant. 
+- "CVC" means a syllable must have a consonant vowel consonant.
+- "CVV?C" means a syllable must have a consonant vowel optional vowel consonant. 
 
 phrase_structure is a string representing phrases/titles
-
-"DS" => definite subject (i.e. the city).
-"DSGN" => definite subject genitive noun (i.e. the city of stone)
+- "DS" => definite subject (i.e. the city).
+- "DSGN" => definite subject genitive noun (i.e. the city of stone)
 
 new Language(config:LanguageConfig)
 
@@ -42,7 +43,7 @@ Language.createWord
 public function createWord(?key:String, ?min:Int = 2, ?max:Int = 4):String {}
 ```
 
-- creates a word based on the key
+- key to store word as (usually english word)
 - min syllables
 - max syllables
 
