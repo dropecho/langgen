@@ -1,12 +1,20 @@
-package vantreeseba.naming_language;
+package vantreeseba.langgen;
 
-import vantreeseba.naming_language.Language.LanguageOrthography;
+import vantreeseba.langgen.Language.LanguageOrthography;
 
+@:expose("Spell")
 class Spell {
 	public var ortho:LanguageOrthography;
 
 	public function new(ortho:LanguageOrthography) {
-		this.ortho = ortho;
+		if (ortho == null) {
+			this.ortho = {
+				consonants: Consts.corthsets["Default"],
+				vowels: Consts.vorthsets["Default"]
+			}
+		} else {
+			this.ortho = ortho;
+		}
 	}
 
 	public function getOrthoChar(char:String):String {

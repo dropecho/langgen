@@ -1,7 +1,7 @@
-package naming_language;
+package langgen;
 
 import massive.munit.Assert;
-import vantreeseba.naming_language.*;
+import vantreeseba.langgen.*;
 
 class LanguageTest {
 	public var language:Language;

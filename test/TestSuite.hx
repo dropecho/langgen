@@ -1,9 +1,9 @@
 import massive.munit.TestSuite;
 
-import naming_language.ConstsTest;
-import naming_language.LanguageTest;
-import naming_language.RewriteTest;
-import naming_language.SpellTest;
+import langgen.ConstsTest;
+import langgen.LanguageTest;
+import langgen.RewriteTest;
+import langgen.SpellTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -15,9 +15,9 @@ class TestSuite extends massive.munit.TestSuite
 	{
 		super();
 
-		add(naming_language.ConstsTest);
-		add(naming_language.LanguageTest);
-		add(naming_language.RewriteTest);
-		add(naming_language.SpellTest);
+		add(langgen.ConstsTest);
+		add(langgen.LanguageTest);
+		add(langgen.RewriteTest);
+		add(langgen.SpellTest);
 	}
 }

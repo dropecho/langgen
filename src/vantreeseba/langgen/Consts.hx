@@ -1,5 +1,6 @@
-package vantreeseba.naming_language;
+package vantreeseba.langgen;
 
+@:expose("Consts")
 class Consts {
 	public static var consonant_sets = [
 		"Test" => 'bcd'.split(""),
@@ -44,7 +45,7 @@ class Consts {
 	 		* ? = Make word before optional
 	 */
 	public static var phrase_structures = [
-		'NN', 'DS', 'DSGN', 'DNGN', 'NGN', 'D?N', 'N?N', 'D?NN?', 'DNN?', 'D?NG?N', 'D?NNG?', 'D?NNG', 'D?NG?N?', 'D?G?NN',
+		'NS', 'DS', 'DSGN', 'DNGN', 'NGN', 'D?N', 'N?N', 'D?NN?', 'DNN?', 'D?NG?N', 'D?NNG?', 'D?NNG', 'D?NG?N?', 'D?G?NN',
 	];
 
 	static public var default_ortho = [

@@ -1,6 +1,6 @@
-package vantreeseba.naming_language;
+package vantreeseba.langgen;
 
-import vantreeseba.naming_language.Language.LanguageConfig;
+import vantreeseba.langgen.Language.LanguageConfig;
 
 class Rewrite {
 	public var rules:Map<EReg, String> = new Map<EReg, String>();

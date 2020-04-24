@@ -1,9 +1,10 @@
-package vantreeseba.naming_language;
+package vantreeseba.langgen;
 
 import haxe.ds.StringMap;
 import seedyrng.Random;
-import vantreeseba.naming_language.Consts;
+import vantreeseba.langgen.Consts;
 
+@:expose("Config")
 typedef LanguageConfig = {
 	// Phonemes
 	var consonants:Array<String>;
@@ -20,6 +21,7 @@ typedef LanguageOrthography = {
 	var vowels:Map<String, String>;
 }
 
+@:expose("Language")
 class Language {
 	public var random:Random;
 
