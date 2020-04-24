@@ -9,8 +9,8 @@
 	"contributors": [
 		"vantreeseba"
 	],
-	"version": "0.0.1",
-	"releasenote": "Initial release.",
+	"version": "0.1.0",
+	"releasenote": "Expose, make JS work.",
 	"tags": [
 		"text",
 		"game"
