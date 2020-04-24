@@ -1,6 +1,6 @@
-package vantreeseba.langgen;
+package dropecho.langgen;
 
-import vantreeseba.langgen.Language.LanguageOrthography;
+import dropecho.langgen.Language.LanguageOrthography;
 
 @:expose("Spell")
 class Spell {

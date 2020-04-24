@@ -1,4 +1,4 @@
-package vantreeseba.langgen;
+package dropecho.langgen;
 
 @:expose("Consts")
 class Consts {

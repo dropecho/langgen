@@ -1,6 +1,6 @@
-package vantreeseba.langgen;
+package dropecho.langgen;
 
-import vantreeseba.langgen.Language.LanguageConfig;
+import dropecho.langgen.Language.LanguageConfig;
 
 class Rewrite {
 	public var rules:Map<EReg, String> = new Map<EReg, String>();

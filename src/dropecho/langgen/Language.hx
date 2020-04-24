@@ -1,8 +1,8 @@
-package vantreeseba.langgen;
+package dropecho.langgen;
 
 import haxe.ds.StringMap;
 import seedyrng.Random;
-import vantreeseba.langgen.Consts;
+import dropecho.langgen.Consts;
 
 @:expose("Config")
 typedef LanguageConfig = {
