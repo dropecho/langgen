@@ -1,13 +1,13 @@
 package langgen;
 
 import massive.munit.Assert;
-import vantreeseba.langgen.*;
+import dropecho.langgen.*;
 import seedyrng.Random;
 
 class ConstsTest {
 	@Test
 	public function canGetSet() {
-		var foo = Consts.consonant_sets["Test"];
+		var foo = Consts.consonant_sets["Minimal"];
 
 		Assert.isNotNull(foo);
 	}

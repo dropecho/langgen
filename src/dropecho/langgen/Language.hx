@@ -9,6 +9,9 @@ typedef LanguageConfig = {
 	// Phonemes
 	var consonants:Array<String>;
 	var vowels:Array<String>;
+  var lset:Array<String>;
+  var sset:Array<String>;
+  var fset:Array<String>;
 
 	// Structures
 	var syllable_structure:String;
@@ -39,6 +42,9 @@ class Language {
 		this.config = config != null ? config : {
 			consonants: Consts.getRandomConsonantSet(random),
 			vowels: Consts.getRandomVowelSet(random),
+			sset: [],
+			fset: [],
+			lset: [],
 			syllable_structure: Consts.syllable_structures[0],
 			phrase_structure: Consts.phrase_structures[0]
 		};
@@ -60,6 +66,12 @@ class Language {
 						random.choice(config.consonants);
 					case "V" | "?V":
 						random.choice(config.vowels);
+					case "S" | "?S":
+						random.choice(config.sset);
+					case "L" | "?L":
+						random.choice(config.lset);
+					case "F" | "?F":
+						random.choice(config.fset);
 					case _:
 						"";
 				}

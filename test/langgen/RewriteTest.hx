@@ -1,7 +1,7 @@
 package langgen;
 
 import massive.munit.Assert;
-import vantreeseba.langgen.*;
+import dropecho.langgen.*;
 
 class RewriteTest {
 	public var rewriter:Rewrite;
@@ -9,10 +9,13 @@ class RewriteTest {
 	@BeforeClass
 	public function suiteSetup() {
 		var config = {
-			consonants: Consts.consonant_sets['Test'],
-			vowels: Consts.vowel_sets['Test'],
+			consonants: Consts.consonant_sets['Minimal'],
+			vowels: Consts.vowel_sets['Default'],
 			syllable_structure: Consts.syllable_structures[0],
-			phrase_structure: Consts.phrase_structures[0]
+			phrase_structure: Consts.phrase_structures[0],
+			fset: [],
+			sset: [],
+			lset: []
 		};
 
 		rewriter = new Rewrite(config);
@@ -26,7 +29,7 @@ class RewriteTest {
 	@Test
 	public function parseRuleConsonant() {
 		var test = '_C';
-		var expected = '([d]{1})[bcd]{1}';
+		var expected = '([d]{1})[ptkmnls]{1}';
 
 		var out = rewriter.parseRule('d', test);
 
