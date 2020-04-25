@@ -1,7 +1,15 @@
+## <small>0.1.2 (2020-04-25)</small>
+
+* FIX: Fix url in haxelib.json ([25f9bd1](https://github.com/dropecho/langgen/commit/25f9bd1))
+
+
+
 ## <small>0.1.1 (2020-04-24)</small>
 
 * Fix namespace ([fa1ef87](https://github.com/dropecho/langgen/commit/fa1ef87))
+* Release 0.1.1 ([b3a5f4d](https://github.com/dropecho/langgen/commit/b3a5f4d))
 * Update readme ([99f2be0](https://github.com/dropecho/langgen/commit/99f2be0))
+* version ([8478293](https://github.com/dropecho/langgen/commit/8478293))
 
 
 
