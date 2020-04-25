@@ -1,5 +1,8 @@
-## <small>0.1.2 (2020-04-25)</small>
+## <small>0.1.3 (2020-04-25)</small>
 
+* Update README.md ([11bd06f](https://github.com/dropecho/langgen/commit/11bd06f))
+* Update README.md ([8d6e1c0](https://github.com/dropecho/langgen/commit/8d6e1c0))
+* version ([f497615](https://github.com/dropecho/langgen/commit/f497615))
 * FIX: Fix url in haxelib.json ([25f9bd1](https://github.com/dropecho/langgen/commit/25f9bd1))
 
 
