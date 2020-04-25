@@ -9,8 +9,8 @@
 	"contributors": [
 		"vantreeseba"
 	],
-	"version": "0.1.1",
-	"releasenote": "Update readme",
+	"version": "0.1.3",
+	"releasenote": "FIX: Fix url in haxelib.json",
 	"tags": [
 		"text",
 		"game"
