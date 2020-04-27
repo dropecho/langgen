@@ -6,7 +6,7 @@ import dropecho.langgen.Language.LanguageOrthography;
 class Spell {
 	public var ortho:LanguageOrthography;
 
-	public function new(ortho:LanguageOrthography) {
+	public function new(?ortho:LanguageOrthography) {
 		if (ortho == null) {
 			this.ortho = {
 				consonants: Consts.corthsets["Default"],

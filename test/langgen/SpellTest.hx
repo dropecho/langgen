@@ -1,7 +1,7 @@
 package langgen;
 
 import massive.munit.Assert;
-import vantreeseba.langgen.*;
+import dropecho.langgen.*;
 
 class SpellTest {
 	public var speller:Spell;
@@ -14,6 +14,11 @@ class SpellTest {
 		};
 		speller = new Spell(ortho);
 	}
+
+  @Test
+  public function whaaat() {
+    trace('ʃ');
+  }
 
 	@Test
 	public function canInstantiate() {

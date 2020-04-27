@@ -10,7 +10,7 @@ class Consts {
 		'Hawaiian-ish' => 'hklmnpwʔ'.split(""),
 		'Greenlandic-ish' => 'ptkqvsgrmnŋlj'.split(""),
 		'Arabic-ish' => 'tksʃdbqɣxmnlrwj'.split(""),
-		'Arabic-lite' => 'tkdgmnsʃ'.split(''),
+		'Arabic-lite' => 'tkdgmnsʃ'.split(""),
 		'English-lite' => 'ptkbdgmnszʒʧhjw'.split("")
 	];
 
@@ -32,7 +32,7 @@ class Consts {
 	 * F = f sound
 	 * S = s sound
 	 */
-	public static var syllable_structures = [
+	public static var syllable_structures:Array<String> = [
 		'CVC', 'CVV?C', 'CVVC?', 'CVC?', 'CV', 'VC', 'CVF', 'C?VC', 'CVF?', 'CL?VC', 'CL?VF', 'S?CVC', 'S?CVF', 'S?CVC?', 'C?VF', 'C?VC?', 'C?VF?', 'C?L?VC',
 		'VC', 'CVL?C?', 'C?VL?C', 'C?VLC?'
 	];
@@ -44,7 +44,7 @@ class Consts {
 	 		* G = Genitive
 	 		* ? = Make word before optional
 	 */
-	public static var phrase_structures = [
+	public static var phrase_structures:Array<String> = [
 		'NS', 'DS', 'DSGN', 'DNGN', 'NGN', 'D?N', 'N?N', 'D?NN?', 'DNN?', 'D?NG?N', 'D?NNG?', 'D?NNG', 'D?NG?N?', 'D?G?NN',
 	];
 
@@ -77,8 +77,15 @@ class Consts {
 
 	public static function getRandomVowelSet(random) {
 		var keys = [for (x in vowel_sets.keys()) x];
-
 		return vowel_sets[random.choice(keys)];
+	}
+
+	public static function getRandomSyllableStructure(random) {
+		return random.choice(syllable_structures);
+	}
+
+	public static function getRandomPhraseStructure(random) {
+		return random.choice(phrase_structures);
 	}
 }
 /*

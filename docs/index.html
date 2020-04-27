@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+  <script src="./langgen.js"></script>
+<style type="text/css">
+  table {
+    flex:1;
+    width: 400px;
+    border:1px solid black;
+    border-collapse:collapse;
+      margin: 10px;
+  }
+  tr {
+    margin: 20px;
+    border:1px solid black;
+    border-collapse:collapse;
+  }
+  td {
+    margin: 20px;
+    padding: 10px;
+    border:1px solid black;
+  }
+
+  #langname , #generate {
+    font-size: 24px;
+      padding: 10px;
+  }
+
+  .container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+</style>
+</head>
+<body>
+  <button id="generate" onClick="generate()">Generate another</button>
+  <div id="langname"></div>
+  <div class="container">
+    <table id="config" style="">
+    </table>
+
+    <table id="words" style="">
+      <thead><th>Word</th><th>Meaning</th></thead>
+    </table>
+  </div>
+  <script src="./index.js"></script>
+</body>

@@ -1,7 +1,7 @@
 package langgen;
 
 import massive.munit.Assert;
-import vantreeseba.langgen.*;
+import dropecho.langgen.*;
 import seedyrng.Random;
 
 class ConstsTest {

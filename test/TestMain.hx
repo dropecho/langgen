@@ -1,4 +1,4 @@
-import massive.munit.client.RichPrintClient;
+import massive.munit.client.PrintClient;
 import massive.munit.TestRunner;
 import mcover.coverage.munit.client.MCoverPrintClient;
 
@@ -18,7 +18,7 @@ class TestMain {
 		#if MCOVER
 		var client = new MCoverPrintClient();
 		#else
-		var client = new RichPrintClient();
+		var client = new PrintClient();
 		#end
 
 		var runner:TestRunner = new TestRunner(client);

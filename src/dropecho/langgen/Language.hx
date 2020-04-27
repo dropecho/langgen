@@ -3,6 +3,7 @@ package dropecho.langgen;
 import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
+import dropecho.langgen.Spell;
 
 @:expose("Config")
 typedef LanguageConfig = {
@@ -24,6 +25,7 @@ typedef LanguageOrthography = {
 @:expose("Language")
 class Language {
 	public var random:Random;
+	public var spell:Spell;
 
 	public var config:LanguageConfig;
 
@@ -39,9 +41,11 @@ class Language {
 		this.config = config != null ? config : {
 			consonants: Consts.getRandomConsonantSet(random),
 			vowels: Consts.getRandomVowelSet(random),
-			syllable_structure: Consts.syllable_structures[0],
-			phrase_structure: Consts.phrase_structures[0]
+			syllable_structure: Consts.getRandomSyllableStructure(random),
+			phrase_structure: Consts.getRandomPhraseStructure(random)
 		};
+
+		spell = new Spell();
 
 		// TODO: Extract this to something else.
 		genitive = createWord("of", 1, 1);
@@ -77,12 +81,14 @@ class Language {
 				this.createSyllable()
 		].join("");
 
+    word = spell.spell(word);
+
 		if (key != null && !words.exists(key)) {
 			words.set(key, word);
 			trans_words.set(word, key);
 		}
 
-		return word;
+		return word; //spell.spell(word);
 	}
 
 	public function createPhrase(?key:String):String {
@@ -109,7 +115,7 @@ class Language {
 			}
 		].join(" ");
 
-		return phrase;
+		return spell.spell(phrase);
 	}
 
 	public function translate(text:String) {
