@@ -9,15 +9,15 @@
 # -swf build/as3_test.swf
 
 ## JavaScript
---next
--main TestMain
--lib munit
--lib hamcrest
--lib seedyrng
--cp src
-
--cp test
--js build/js_test.js
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -lib seedyrng
+# -cp src
+#
+# -cp test
+# -js build/js_test.js
 
 ## Neko
 # --next

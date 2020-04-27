@@ -2,6 +2,8 @@ package dropecho.langgen;
 
 import dropecho.langgen.Language.LanguageConfig;
 
+using StringTools;
+
 class Rewrite {
 	public var rules:Map<EReg, String> = new Map<EReg, String>();
 	public var config:LanguageConfig;
@@ -16,20 +18,20 @@ class Rewrite {
 
 		rule = ~/C/g.replace(rule, '[$consts]{1}');
 		rule = ~/V/g.replace(rule, '[$vowels]{1}');
-		rule = ~/_/g.replace(rule, '([$char]{1})');
+		rule = ~/_/g.replace(rule, '($char)');
 
 		return rule;
 	}
 
 	public function addRule(char:String, rule:String, replaceWith:String) {
-    var reg = new EReg(parseRule(char, rule), '');
-    rules.set(reg, replaceWith);
+		var reg = new EReg(parseRule(char, rule), 'g');
+		rules.set(reg, replaceWith);
 	}
 
 	public function rewrite(s:String) {
 		var after = s;
 		for (rule => replaceWith in rules) {
-			after = rule.replace(after, replaceWith);
+      after = rule.replace(after, replaceWith);
 		}
 
 		return after;

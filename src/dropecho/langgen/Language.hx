@@ -54,8 +54,8 @@ class Language {
 			sset: Consts.getRandomSSet(random),
 			lset: Consts.getRandomLSet(random),
 			fset: Consts.getRandomFSet(random),
-			word_length_min: randommin = random.randomInt(1, 3),
-			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(0, 5))
+			word_length_min: randommin = random.randomInt(1, 2),
+			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
 		};
 
 		spell = new Spell();
@@ -66,22 +66,25 @@ class Language {
 	}
 
 	public function createSyllable():String {
+		var split = config.syllable_structure.split("");
 		return [
-			for (x in config.syllable_structure.split("")) {
-				if (x.split("")[0] == "?") {
-					if (this.random.random() > 0.5)
-						continue;
-				}
-				switch (x) {
-					case "C" | "?C":
+			for (x in 0...split.length) {
+				if (split[x] == "?")
+					continue;
+
+				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5)
+					continue;
+
+				switch (split[x]) {
+					case "C":
 						random.choice(config.consonants);
-					case "V" | "?V":
+					case "V":
 						random.choice(config.vowels);
-					case "S" | "?S":
+					case "S":
 						random.choice(config.sset);
-					case "L" | "?L":
+					case "L":
 						random.choice(config.lset);
-					case "F" | "?F":
+					case "F":
 						random.choice(config.fset);
 					case _:
 						"";
@@ -102,10 +105,7 @@ class Language {
 			return words.get(key);
 		}
 
-		var word = [
-			for (_ in 0...random.randomInt(min, max))
-				this.createSyllable()
-		].join("");
+		var word = [for (_ in 0...random.randomInt(min, max)) createSyllable()].join("");
 
 		word = spell.spell(word);
 
@@ -114,38 +114,46 @@ class Language {
 			trans_words.set(word, key);
 		}
 
-		return word; // spell.spell(word);
+		return word;
 	}
 
 	public function createPhrase(?key:String):String {
 		var subject = null;
 		if (key != null && words.exists(key)) {
 			subject = words.get(key);
+		} else {
+			subject = createWord();
 		}
+		var split = config.phrase_structure.split("");
 		var phrase = [
-			for (x in config.phrase_structure.split("")) {
-				if (x.split("")[0] == "?" && this.random.random() > 0.5)
+			for (x in 0...split.length) {
+				if (split[x] == "?")
 					continue;
-				switch (x) {
-					case "D" | "?D":
+
+				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5)
+					continue;
+
+				switch (split[x]) {
+					case "D":
 						definite;
-					case "G" | "?G":
+					case "G":
 						genitive;
-					case "N" | "?N":
-						if (this.random.random() > 0.2) {
-							words.get(random.choice([for (k in words.keys()) k].filter(x -> x != "the" && x != "of")));
+					case "N":
+						var choices = [for (k in words.keys()) k].filter(x -> x != "the" && x != "of");
+						if (this.random.random() > 0.2 && choices.length > 0) {
+							words.get(random.choice(choices));
 						} else {
 							createWord();
 						}
 					case "S":
-						subject != null ? subject : createWord(key);
+						subject;
 					case _:
 						"";
 				}
 			}
 		].join(" ");
 
-		return spell.spell(phrase);
+		return phrase;
 	}
 
 	public function translate(text:String) {

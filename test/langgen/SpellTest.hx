@@ -15,11 +15,6 @@ class SpellTest {
 		speller = new Spell(ortho);
 	}
 
-  @Test
-  public function whaaat() {
-    trace('ʃ');
-  }
-
 	@Test
 	public function canInstantiate() {
 		Assert.isNotNull(speller);

@@ -1,5 +1,6 @@
 package dropecho.langgen;
 
+import seedyrng.Random;
 import dropecho.langgen.Language.LanguageOrthography;
 
 @:expose("Spell")
@@ -7,10 +8,11 @@ class Spell {
 	public var ortho:LanguageOrthography;
 
 	public function new(?ortho:LanguageOrthography) {
+		var random = new Random();
 		if (ortho == null) {
 			this.ortho = {
-				consonants: Consts.corthsets["Default"],
-				vowels: Consts.vorthsets["Default"]
+				consonants: Consts.getRandomCorthSet(random),
+				vowels: Consts.getRandomVorthSet(random)
 			}
 		} else {
 			this.ortho = ortho;

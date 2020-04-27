@@ -30,9 +30,11 @@ function generate(){
 
   let languagename = gen.createWord('language');
 
+  document.getElementById('langname').innerHTML =
+    `The language of ${ languagename }`;
+
   var configtable = document.getElementById('config');
   configtable.innerHTML = '<thead><th>Config</th><th></th></thead>';
-
 
   function addConfigRow(name, data) {
     var row = document.createElement('tr');
@@ -57,8 +59,37 @@ function generate(){
   addConfigRow('max syllables in word', gen.config.word_length_max);
 
 
-  document.getElementById('langname').innerHTML =
-    `The language of ${ languagename }`;
+  var orthoTable = document.getElementById('ortho');
+  orthoTable.innerHTML = '<thead><th>Phoneme</th><th>Written</th></thead>';
+
+  function addOrthoRow(letter, ortho) {
+    var row = document.createElement('tr');
+    orthoTable.append(row);
+
+    var configName = document.createElement('td');
+    configName.innerText = letter;
+    var configValue = document.createElement('td');
+    configValue.innerText = ortho;
+    row.append(configName);
+    row.append(configValue);
+  }
+
+  var letters = gen.config.vowels
+    .concat(gen.config.consonants)
+    .concat(gen.config.sset)
+    .concat(gen.config.lset)
+    .concat(gen.config.fset)
+    .reduce((a, b) => {
+      if(a.indexOf(b) === -1) {
+        a.push(b);
+      }
+
+      return a;
+    }, []);
+
+  for(let i = 0; i < letters.length; i++) {
+    addOrthoRow(letters[i], gen.spell.spell(letters[i]));
+  }
 
 
   let wordTable = document.getElementById('words');

@@ -1,5 +1,7 @@
 package dropecho.langgen;
 
+import seedyrng.Random;
+
 @:expose("Consts")
 class Consts {
 	public static var consonant_sets = [
@@ -87,37 +89,45 @@ class Consts {
 		'Doubles' => ['A' => 'aa', 'E' => 'ee', 'I' => 'ii', 'O' => 'oo', 'U' => 'uu']
 	];
 
-	public static function getRandomConsonantSet(random) {
+	public static function getRandomCorthSet(random:Random) {
+		return corthsets.get(random.choice([for (k in corthsets.keys()) k]));
+	}
+
+	public static function getRandomVorthSet(random:Random) {
+		return vorthsets.get(random.choice([for (k in vorthsets.keys()) k]));
+	}
+
+	public static function getRandomConsonantSet(random:Random) {
 		var keys = [for (x in consonant_sets.keys()) x];
 
 		return consonant_sets[random.choice(keys)];
 	}
 
-	public static function getRandomVowelSet(random) {
+	public static function getRandomVowelSet(random:Random) {
 		var keys = [for (x in vowel_sets.keys()) x];
 		return vowel_sets[random.choice(keys)];
 	}
 
-	public static function getRandomSSet(random) {
+	public static function getRandomSSet(random:Random) {
 		var keys = [for (x in ssets.keys()) x];
 		return ssets[random.choice(keys)];
 	}
 
-	public static function getRandomFSet(random) {
+	public static function getRandomFSet(random:Random) {
 		var keys = [for (x in fsets.keys()) x];
 		return fsets[random.choice(keys)];
 	}
 
-	public static function getRandomLSet(random) {
+	public static function getRandomLSet(random:Random) {
 		var keys = [for (x in lsets.keys()) x];
 		return lsets[random.choice(keys)];
 	}
 
-	public static function getRandomSyllableStructure(random) {
+	public static function getRandomSyllableStructure(random:Random) {
 		return random.choice(syllable_structures);
 	}
 
-	public static function getRandomPhraseStructure(random) {
+	public static function getRandomPhraseStructure(random:Random) {
 		return random.choice(phrase_structures);
 	}
 }

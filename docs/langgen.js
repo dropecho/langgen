@@ -1184,6 +1184,38 @@ class haxe_ds__$Map_Map_$Impl_$ {
 $hxClasses["haxe.ds._Map.Map_Impl_"] = haxe_ds__$Map_Map_$Impl_$;
 haxe_ds__$Map_Map_$Impl_$.__name__ = "haxe.ds._Map.Map_Impl_";
 class dropecho_langgen_Consts {
+	static getRandomCorthSet(random) {
+		var this1 = dropecho_langgen_Consts.corthsets;
+		var _g = [];
+		var k = dropecho_langgen_Consts.corthsets.keys();
+		while(k.hasNext()) {
+			var k1 = k.next();
+			_g.push(k1);
+		}
+		var key = random.choice(_g);
+		var _this = this1;
+		if(__map_reserved[key] != null) {
+			return _this.getReserved(key);
+		} else {
+			return _this.h[key];
+		}
+	}
+	static getRandomVorthSet(random) {
+		var this1 = dropecho_langgen_Consts.vorthsets;
+		var _g = [];
+		var k = dropecho_langgen_Consts.vorthsets.keys();
+		while(k.hasNext()) {
+			var k1 = k.next();
+			_g.push(k1);
+		}
+		var key = random.choice(_g);
+		var _this = this1;
+		if(__map_reserved[key] != null) {
+			return _this.getReserved(key);
+		} else {
+			return _this.h[key];
+		}
+	}
 	static getRandomConsonantSet(random) {
 		var _g = [];
 		var x = dropecho_langgen_Consts.consonant_sets.keys();
@@ -1295,8 +1327,8 @@ class dropecho_langgen_Language {
 			var tmp5 = dropecho_langgen_Consts.getRandomSSet(this.random);
 			var tmp6 = dropecho_langgen_Consts.getRandomLSet(this.random);
 			var tmp7 = dropecho_langgen_Consts.getRandomFSet(this.random);
-			randommin = this.random.randomInt(1,3);
-			tmp = { consonants : tmp1, vowels : tmp2, syllable_structure : tmp3, phrase_structure : tmp4, sset : tmp5, lset : tmp6, fset : tmp7, word_length_min : randommin, word_length_max : this.random.randomInt(randommin + 1,randommin + this.random.randomInt(0,5))};
+			randommin = this.random.randomInt(1,2);
+			tmp = { consonants : tmp1, vowels : tmp2, syllable_structure : tmp3, phrase_structure : tmp4, sset : tmp5, lset : tmp6, fset : tmp7, word_length_min : randommin, word_length_max : this.random.randomInt(randommin + 1,randommin + this.random.randomInt(1,4))};
 		}
 		this.config = tmp;
 		this.spell = new dropecho_langgen_Spell();
@@ -1304,32 +1336,33 @@ class dropecho_langgen_Language {
 		this.definite = this.createWord("the",1,1);
 	}
 	createSyllable() {
+		var split = this.config.syllable_structure.split("");
 		var _g = [];
 		var _g1 = 0;
-		var _g2 = this.config.syllable_structure.split("");
-		while(_g1 < _g2.length) {
-			var x = _g2[_g1];
-			++_g1;
-			if(x.split("")[0] == "?") {
-				if(this.random.random() > 0.5) {
-					continue;
-				}
+		var _g2 = split.length;
+		while(_g1 < _g2) {
+			var x = _g1++;
+			if(split[x] == "?") {
+				continue;
+			}
+			if(x < split.length - 1 && split[x + 1] == "?" && this.random.random() > 0.5) {
+				continue;
 			}
 			var tmp;
-			switch(x) {
-			case "?F":case "F":
-				tmp = this.random.choice(this.config.fset);
-				break;
-			case "?C":case "C":
+			switch(split[x]) {
+			case "C":
 				tmp = this.random.choice(this.config.consonants);
 				break;
-			case "?L":case "L":
+			case "F":
+				tmp = this.random.choice(this.config.fset);
+				break;
+			case "L":
 				tmp = this.random.choice(this.config.lset);
 				break;
-			case "?S":case "S":
+			case "S":
 				tmp = this.random.choice(this.config.sset);
 				break;
-			case "?V":case "V":
+			case "V":
 				tmp = this.random.choice(this.config.vowels);
 				break;
 			default:
@@ -1405,52 +1438,57 @@ class dropecho_langgen_Language {
 		if(tmp) {
 			var _this1 = this.words;
 			subject = __map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key];
+		} else {
+			subject = this.createWord();
 		}
+		var split = this.config.phrase_structure.split("");
 		var _g = [];
 		var _g1 = 0;
-		var _g2 = this.config.phrase_structure.split("");
-		while(_g1 < _g2.length) {
-			var x = _g2[_g1];
-			++_g1;
-			if(x.split("")[0] == "?" && this.random.random() > 0.5) {
+		var _g2 = split.length;
+		while(_g1 < _g2) {
+			var x = _g1++;
+			if(split[x] == "?") {
+				continue;
+			}
+			if(x < split.length - 1 && split[x + 1] == "?" && this.random.random() > 0.5) {
 				continue;
 			}
 			var phrase;
-			switch(x) {
-			case "?D":case "D":
+			switch(split[x]) {
+			case "D":
 				phrase = this.definite;
 				break;
-			case "?G":case "G":
+			case "G":
 				phrase = this.genitive;
 				break;
-			case "?N":case "N":
-				if(this.random.random() > 0.2) {
+			case "N":
+				var _g11 = [];
+				var k = this.words.keys();
+				while(k.hasNext()) {
+					var k1 = k.next();
+					_g11.push(k1);
+				}
+				var _g3 = [];
+				var _g12 = 0;
+				var _g21 = _g11;
+				while(_g12 < _g21.length) {
+					var v = _g21[_g12];
+					++_g12;
+					if(v != "the" && v != "of") {
+						_g3.push(v);
+					}
+				}
+				var choices = _g3;
+				if(this.random.random() > 0.2 && choices.length > 0) {
 					var _this2 = this.words;
-					var key1 = this.random;
-					var _g11 = [];
-					var k = this.words.keys();
-					while(k.hasNext()) {
-						var k1 = k.next();
-						_g11.push(k1);
-					}
-					var _g3 = [];
-					var _g12 = 0;
-					var _g21 = _g11;
-					while(_g12 < _g21.length) {
-						var v = _g21[_g12];
-						++_g12;
-						if(v != "the" && v != "of") {
-							_g3.push(v);
-						}
-					}
-					var key2 = key1.choice(_g3);
-					phrase = __map_reserved[key2] != null ? _this2.getReserved(key2) : _this2.h[key2];
+					var key1 = this.random.choice(choices);
+					phrase = __map_reserved[key1] != null ? _this2.getReserved(key1) : _this2.h[key1];
 				} else {
 					phrase = this.createWord();
 				}
 				break;
 			case "S":
-				phrase = subject != null ? subject : this.createWord(key);
+				phrase = subject;
 				break;
 			default:
 				phrase = "";
@@ -1458,7 +1496,7 @@ class dropecho_langgen_Language {
 			_g.push(phrase);
 		}
 		var phrase1 = _g.join(" ");
-		return this.spell.spell(phrase1);
+		return phrase1;
 	}
 	translate(text) {
 		var tokens = StringTools.trim(text).split(" ");
@@ -1520,11 +1558,11 @@ class dropecho_langgen_Rewrite {
 		var _this_r1 = new RegExp("V","g".split("u").join(""));
 		rule = rule.replace(_this_r1,"[" + vowels + "]{1}");
 		var _this_r2 = new RegExp("_","g".split("u").join(""));
-		rule = rule.replace(_this_r2,"([" + char + "]{1})");
+		rule = rule.replace(_this_r2,"(" + char + ")");
 		return rule;
 	}
 	addRule(char,rule,replaceWith) {
-		var reg = new EReg(this.parseRule(char,rule),"");
+		var reg = new EReg(this.parseRule(char,rule),"g");
 		this.rules.set(reg,replaceWith);
 	}
 	rewrite(s) {
@@ -1548,11 +1586,9 @@ Object.assign(dropecho_langgen_Rewrite.prototype, {
 });
 class dropecho_langgen_Spell {
 	constructor(ortho) {
+		var random = new seedyrng_Random();
 		if(ortho == null) {
-			var _this = dropecho_langgen_Consts.corthsets;
-			var tmp = __map_reserved["Default"] != null ? _this.getReserved("Default") : _this.h["Default"];
-			var _this1 = dropecho_langgen_Consts.vorthsets;
-			this.ortho = { consonants : tmp, vowels : __map_reserved["Default"] != null ? _this1.getReserved("Default") : _this1.h["Default"]};
+			this.ortho = { consonants : dropecho_langgen_Consts.getRandomCorthSet(random), vowels : dropecho_langgen_Consts.getRandomVorthSet(random)};
 		} else {
 			this.ortho = ortho;
 		}
