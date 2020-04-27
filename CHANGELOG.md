@@ -1,8 +1,16 @@
+## 0.3.0 (2020-04-27)
+
+* Lots of cleanup, fix some rewrite rules, better example ([146751b](https://github.com/dropecho/langgen/commit/146751b))
+
+
+
 ## 0.2.0 (2020-04-27)
 
 * Improving docs ([4eb8d82](https://github.com/dropecho/langgen/commit/4eb8d82))
 * Lots of tweaks ([2649028](https://github.com/dropecho/langgen/commit/2649028))
+* Release 0.2.0 ([e8304e1](https://github.com/dropecho/langgen/commit/e8304e1))
 * Update README.md ([d7005c3](https://github.com/dropecho/langgen/commit/d7005c3))
+* version ([5fbcd08](https://github.com/dropecho/langgen/commit/5fbcd08))
 
 
 
