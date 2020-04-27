@@ -10,6 +10,9 @@ typedef LanguageConfig = {
 	// Phonemes
 	var consonants:Array<String>;
 	var vowels:Array<String>;
+	var lset:Array<String>;
+	var sset:Array<String>;
+	var fset:Array<String>;
 
 	// Structures
 	var syllable_structure:String;
@@ -42,7 +45,10 @@ class Language {
 			consonants: Consts.getRandomConsonantSet(random),
 			vowels: Consts.getRandomVowelSet(random),
 			syllable_structure: Consts.getRandomSyllableStructure(random),
-			phrase_structure: Consts.getRandomPhraseStructure(random)
+			phrase_structure: Consts.getRandomPhraseStructure(random),
+			sset: [],
+			fset: [],
+			lset: [],
 		};
 
 		spell = new Spell();
@@ -64,6 +70,12 @@ class Language {
 						random.choice(config.consonants);
 					case "V" | "?V":
 						random.choice(config.vowels);
+					case "S" | "?S":
+						random.choice(config.sset);
+					case "L" | "?L":
+						random.choice(config.lset);
+					case "F" | "?F":
+						random.choice(config.fset);
 					case _:
 						"";
 				}
@@ -81,14 +93,14 @@ class Language {
 				this.createSyllable()
 		].join("");
 
-    word = spell.spell(word);
+		word = spell.spell(word);
 
 		if (key != null && !words.exists(key)) {
 			words.set(key, word);
 			trans_words.set(word, key);
 		}
 
-		return word; //spell.spell(word);
+		return word; // spell.spell(word);
 	}
 
 	public function createPhrase(?key:String):String {

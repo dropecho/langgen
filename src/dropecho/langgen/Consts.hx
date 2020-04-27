@@ -3,7 +3,6 @@ package dropecho.langgen;
 @:expose("Consts")
 class Consts {
 	public static var consonant_sets = [
-		"Test" => 'bcd'.split(""),
 		'Minimal' => 'ptkmnls'.split(""),
 		'English-ish' => 'ptkbdgmnlrsʃzʒʧ'.split(""),
 		'Pirahã (very simple)' => 'ptkmnh'.split(""),
@@ -15,8 +14,7 @@ class Consts {
 	];
 
 	public static var vowel_sets = [
-		"Test" => 'aeiou'.split(""),
-		'Standard 5-vowel' => 'aeiou'.split(""),
+		'Default' => 'aeiou'.split(""),
 		'3-vowel a i u' => 'aiu'.split(""),
 		'Extra A E I' => 'aeiouAEI'.split(""),
 		'Extra U' => 'aeiouU'.split(""),
@@ -69,6 +67,23 @@ class Consts {
 		'Doubles' => ['A' => 'aa', 'E' => 'ee', 'I' => 'ii', 'O' => 'oo', 'U' => 'uu']
 	];
 
+	static public var ssets = ['Just s' => ['s'], 's ʃ' => ['s', 'ʃ'], 's ʃ f' => ['s', 'ʃ', 'f']];
+
+	static public var lsets = [
+		'r l' => 'rl'.split(""),
+		'Just r' => 'r'.split(""),
+		'Just l' => 'l'.split(""),
+		'w j' => 'wj'.split(""),
+		'r l w j' => 'rlwj'.split("")
+	];
+
+	static public var fsets = [
+		'm n' => 'mn'.split(""),
+		's k' => 'sk'.split(""),
+		'm n ŋ' => 'mnŋ'.split(""),
+		's ʃ z ʒ' => 'sʃzʒ'.split("")
+	];
+
 	public static function getRandomConsonantSet(random) {
 		var keys = [for (x in consonant_sets.keys()) x];
 
@@ -89,64 +104,6 @@ class Consts {
 	}
 }
 /*
-
-
-	const ssets = [
-	  {
-	name: 'Just s',
-	S: 's'
-	  },
-	  {
-	name: 's ʃ',
-	S: 'sʃ'
-	  },
-	  {
-	name: 's ʃ f',
-	S: 'sʃf'
-	  }
-	];
-
-	const lsets = [
-	  {
-	name: 'r l',
-	L: 'rl'
-	  },
-	  {
-	name: 'Just r',
-	L: 'r'
-	  },
-	  {
-	name: 'Just l',
-	L: 'l'
-	  },
-	  {
-	name: 'w j',
-	L: 'wj'
-	  },
-	  {
-	name: 'r l w j',
-	L: 'rlwj'
-	  }
-	];
-
-	const fsets = [
-	  {
-	name: 'm n',
-	F: 'mn'
-	  },
-	  {
-	name: 's k',
-	F: 'sk'
-	  },
-	  {
-	name: 'm n ŋ',
-	F: 'mnŋ'
-	  },
-	  {
-	name: 's ʃ z ʒ',
-	F: 'sʃzʒ'
-	  }
-	];
 
 	const ressets = [
 	  {
