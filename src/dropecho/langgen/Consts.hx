@@ -23,6 +23,23 @@ class Consts {
 		'Extra A O U' => 'aeiouAOU'.split("")
 	];
 
+	static public var ssets = ['Just s' => ['s'], 's ʃ' => ['s', 'ʃ'], 's ʃ f' => ['s', 'ʃ', 'f']];
+
+	static public var lsets = [
+		'r l' => 'rl'.split(""),
+		'Just r' => 'r'.split(""),
+		'Just l' => 'l'.split(""),
+		'w j' => 'wj'.split(""),
+		'r l w j' => 'rlwj'.split("")
+	];
+
+	static public var fsets = [
+		'm n' => 'mn'.split(""),
+		's k' => 'sk'.split(""),
+		'm n ŋ' => 'mnŋ'.split(""),
+		's ʃ z ʒ' => 'sʃzʒ'.split("")
+	];
+
 	/*
 	 * C = consonant
 	 * V = vowel
@@ -42,8 +59,11 @@ class Consts {
 	 		* G = Genitive
 	 		* ? = Make word before optional
 	 */
+	// public static var phrase_structures:Array<String> = [
+	//   'NS', 'DS', 'DSGN', 'DNGN', 'NGN', 'D?N', 'N?N', 'D?NN?', 'DNN?', 'D?NG?N', 'D?NNG?', 'D?NNG', 'D?NG?N?', 'D?G?NN',
+	// ];
 	public static var phrase_structures:Array<String> = [
-		'NS', 'DS', 'DSGN', 'DNGN', 'NGN', 'D?N', 'N?N', 'D?NN?', 'DNN?', 'D?NG?N', 'D?NNG?', 'D?NNG', 'D?NG?N?', 'D?G?NN',
+		'DS', 'DSGN', 'DNGN', 'NGS', 'D?S', 'S?N', 'D?SN?', 'DSN?', 'D?SG?N', 'D?NSG?', 'D?NSG', 'D?SG?N?', 'D?G?NS'
 	];
 
 	static public var default_ortho = [
@@ -67,23 +87,6 @@ class Consts {
 		'Doubles' => ['A' => 'aa', 'E' => 'ee', 'I' => 'ii', 'O' => 'oo', 'U' => 'uu']
 	];
 
-	static public var ssets = ['Just s' => ['s'], 's ʃ' => ['s', 'ʃ'], 's ʃ f' => ['s', 'ʃ', 'f']];
-
-	static public var lsets = [
-		'r l' => 'rl'.split(""),
-		'Just r' => 'r'.split(""),
-		'Just l' => 'l'.split(""),
-		'w j' => 'wj'.split(""),
-		'r l w j' => 'rlwj'.split("")
-	];
-
-	static public var fsets = [
-		'm n' => 'mn'.split(""),
-		's k' => 'sk'.split(""),
-		'm n ŋ' => 'mnŋ'.split(""),
-		's ʃ z ʒ' => 'sʃzʒ'.split("")
-	];
-
 	public static function getRandomConsonantSet(random) {
 		var keys = [for (x in consonant_sets.keys()) x];
 
@@ -93,6 +96,21 @@ class Consts {
 	public static function getRandomVowelSet(random) {
 		var keys = [for (x in vowel_sets.keys()) x];
 		return vowel_sets[random.choice(keys)];
+	}
+
+	public static function getRandomSSet(random) {
+		var keys = [for (x in ssets.keys()) x];
+		return ssets[random.choice(keys)];
+	}
+
+	public static function getRandomFSet(random) {
+		var keys = [for (x in fsets.keys()) x];
+		return fsets[random.choice(keys)];
+	}
+
+	public static function getRandomLSet(random) {
+		var keys = [for (x in lsets.keys()) x];
+		return lsets[random.choice(keys)];
 	}
 
 	public static function getRandomSyllableStructure(random) {

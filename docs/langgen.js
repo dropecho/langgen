@@ -1218,6 +1218,57 @@ class dropecho_langgen_Consts {
 			return _this.h[key];
 		}
 	}
+	static getRandomSSet(random) {
+		var _g = [];
+		var x = dropecho_langgen_Consts.ssets.keys();
+		while(x.hasNext()) {
+			var x1 = x.next();
+			_g.push(x1);
+		}
+		var keys = _g;
+		var this1 = dropecho_langgen_Consts.ssets;
+		var key = random.choice(keys);
+		var _this = this1;
+		if(__map_reserved[key] != null) {
+			return _this.getReserved(key);
+		} else {
+			return _this.h[key];
+		}
+	}
+	static getRandomFSet(random) {
+		var _g = [];
+		var x = dropecho_langgen_Consts.fsets.keys();
+		while(x.hasNext()) {
+			var x1 = x.next();
+			_g.push(x1);
+		}
+		var keys = _g;
+		var this1 = dropecho_langgen_Consts.fsets;
+		var key = random.choice(keys);
+		var _this = this1;
+		if(__map_reserved[key] != null) {
+			return _this.getReserved(key);
+		} else {
+			return _this.h[key];
+		}
+	}
+	static getRandomLSet(random) {
+		var _g = [];
+		var x = dropecho_langgen_Consts.lsets.keys();
+		while(x.hasNext()) {
+			var x1 = x.next();
+			_g.push(x1);
+		}
+		var keys = _g;
+		var this1 = dropecho_langgen_Consts.lsets;
+		var key = random.choice(keys);
+		var _this = this1;
+		if(__map_reserved[key] != null) {
+			return _this.getReserved(key);
+		} else {
+			return _this.h[key];
+		}
+	}
 	static getRandomSyllableStructure(random) {
 		return random.choice(dropecho_langgen_Consts.syllable_structures);
 	}
@@ -1232,7 +1283,22 @@ class dropecho_langgen_Language {
 		this.trans_words = new haxe_ds_StringMap();
 		this.words = new haxe_ds_StringMap();
 		this.random = new seedyrng_Random();
-		this.config = config != null ? config : { consonants : dropecho_langgen_Consts.getRandomConsonantSet(this.random), vowels : dropecho_langgen_Consts.getRandomVowelSet(this.random), syllable_structure : dropecho_langgen_Consts.getRandomSyllableStructure(this.random), phrase_structure : dropecho_langgen_Consts.getRandomPhraseStructure(this.random)};
+		var randommin;
+		var tmp;
+		if(config != null) {
+			tmp = config;
+		} else {
+			var tmp1 = dropecho_langgen_Consts.getRandomConsonantSet(this.random);
+			var tmp2 = dropecho_langgen_Consts.getRandomVowelSet(this.random);
+			var tmp3 = dropecho_langgen_Consts.getRandomSyllableStructure(this.random);
+			var tmp4 = dropecho_langgen_Consts.getRandomPhraseStructure(this.random);
+			var tmp5 = dropecho_langgen_Consts.getRandomSSet(this.random);
+			var tmp6 = dropecho_langgen_Consts.getRandomLSet(this.random);
+			var tmp7 = dropecho_langgen_Consts.getRandomFSet(this.random);
+			randommin = this.random.randomInt(1,3);
+			tmp = { consonants : tmp1, vowels : tmp2, syllable_structure : tmp3, phrase_structure : tmp4, sset : tmp5, lset : tmp6, fset : tmp7, word_length_min : randommin, word_length_max : this.random.randomInt(randommin + 1,randommin + this.random.randomInt(0,5))};
+		}
+		this.config = tmp;
 		this.spell = new dropecho_langgen_Spell();
 		this.genitive = this.createWord("of",1,1);
 		this.definite = this.createWord("the",1,1);
@@ -1251,8 +1317,17 @@ class dropecho_langgen_Language {
 			}
 			var tmp;
 			switch(x) {
+			case "?F":case "F":
+				tmp = this.random.choice(this.config.fset);
+				break;
 			case "?C":case "C":
 				tmp = this.random.choice(this.config.consonants);
+				break;
+			case "?L":case "L":
+				tmp = this.random.choice(this.config.lset);
+				break;
+			case "?S":case "S":
+				tmp = this.random.choice(this.config.sset);
 				break;
 			case "?V":case "V":
 				tmp = this.random.choice(this.config.vowels);
@@ -1265,11 +1340,11 @@ class dropecho_langgen_Language {
 		return _g.join("");
 	}
 	createWord(key,min,max) {
-		if(max == null) {
-			max = 4;
-		}
 		if(min == null) {
-			min = 2;
+			min = this.config.word_length_min;
+		}
+		if(max == null) {
+			max = this.config.word_length_max;
 		}
 		var tmp;
 		if(key != null) {
@@ -1349,7 +1424,30 @@ class dropecho_langgen_Language {
 				phrase = this.genitive;
 				break;
 			case "?N":case "N":
-				phrase = this.createWord();
+				if(this.random.random() > 0.2) {
+					var _this2 = this.words;
+					var key1 = this.random;
+					var _g11 = [];
+					var k = this.words.keys();
+					while(k.hasNext()) {
+						var k1 = k.next();
+						_g11.push(k1);
+					}
+					var _g3 = [];
+					var _g12 = 0;
+					var _g21 = _g11;
+					while(_g12 < _g21.length) {
+						var v = _g21[_g12];
+						++_g12;
+						if(v != "the" && v != "of") {
+							_g3.push(v);
+						}
+					}
+					var key2 = key1.choice(_g3);
+					phrase = __map_reserved[key2] != null ? _this2.getReserved(key2) : _this2.h[key2];
+				} else {
+					phrase = this.createWord();
+				}
 				break;
 			case "S":
 				phrase = subject != null ? subject : this.createWord(key);
@@ -1363,11 +1461,22 @@ class dropecho_langgen_Language {
 		return this.spell.spell(phrase1);
 	}
 	translate(text) {
-		var tokens = text.split(" ");
+		var tokens = StringTools.trim(text).split(" ");
 		var _g = new haxe_ds_StringMap();
 		var _g1 = 0;
-		while(_g1 < tokens.length) {
-			var x = tokens[_g1];
+		var _g2 = [];
+		var _g11 = 0;
+		var _g21 = tokens;
+		while(_g11 < _g21.length) {
+			var v = _g21[_g11];
+			++_g11;
+			if(v != null && v.length > 0) {
+				_g2.push(v);
+			}
+		}
+		var _g22 = _g2;
+		while(_g1 < _g22.length) {
+			var x = _g22[_g1];
 			++_g1;
 			var word;
 			var _this = this.trans_words;
@@ -4421,75 +4530,67 @@ dropecho_langgen_Consts.consonant_sets = (function($this) {
 	var $r;
 	var _g = new haxe_ds_StringMap();
 	{
-		var value = "bcd".split("");
-		if(__map_reserved["Test"] != null) {
-			_g.setReserved("Test",value);
-		} else {
-			_g.h["Test"] = value;
-		}
-	}
-	{
-		var value1 = "ptkmnls".split("");
+		var value = "ptkmnls".split("");
 		if(__map_reserved["Minimal"] != null) {
-			_g.setReserved("Minimal",value1);
+			_g.setReserved("Minimal",value);
 		} else {
-			_g.h["Minimal"] = value1;
+			_g.h["Minimal"] = value;
 		}
 	}
 	{
-		var value2 = "ptkbdgmnlrsʃzʒʧ".split("");
+		var value1 = "ptkbdgmnlrsʃzʒʧ".split("");
 		if(__map_reserved["English-ish"] != null) {
-			_g.setReserved("English-ish",value2);
+			_g.setReserved("English-ish",value1);
 		} else {
-			_g.h["English-ish"] = value2;
+			_g.h["English-ish"] = value1;
 		}
 	}
 	{
-		var value3 = "ptkmnh".split("");
+		var value2 = "ptkmnh".split("");
 		if(__map_reserved["Pirahã (very simple)"] != null) {
-			_g.setReserved("Pirahã (very simple)",value3);
+			_g.setReserved("Pirahã (very simple)",value2);
 		} else {
-			_g.h["Pirahã (very simple)"] = value3;
+			_g.h["Pirahã (very simple)"] = value2;
 		}
 	}
 	{
-		var value4 = "hklmnpwʔ".split("");
+		var value3 = "hklmnpwʔ".split("");
 		if(__map_reserved["Hawaiian-ish"] != null) {
-			_g.setReserved("Hawaiian-ish",value4);
+			_g.setReserved("Hawaiian-ish",value3);
 		} else {
-			_g.h["Hawaiian-ish"] = value4;
+			_g.h["Hawaiian-ish"] = value3;
 		}
 	}
 	{
-		var value5 = "ptkqvsgrmnŋlj".split("");
+		var value4 = "ptkqvsgrmnŋlj".split("");
 		if(__map_reserved["Greenlandic-ish"] != null) {
-			_g.setReserved("Greenlandic-ish",value5);
+			_g.setReserved("Greenlandic-ish",value4);
 		} else {
-			_g.h["Greenlandic-ish"] = value5;
+			_g.h["Greenlandic-ish"] = value4;
 		}
 	}
 	{
-		var value6 = "tksʃdbqɣxmnlrwj".split("");
+		var value5 = "tksʃdbqɣxmnlrwj".split("");
 		if(__map_reserved["Arabic-ish"] != null) {
-			_g.setReserved("Arabic-ish",value6);
+			_g.setReserved("Arabic-ish",value5);
 		} else {
-			_g.h["Arabic-ish"] = value6;
+			_g.h["Arabic-ish"] = value5;
 		}
 	}
 	{
-		var value7 = "tkdgmnsʃ".split("");
+		var value6 = "tkdgmnsʃ".split("");
 		if(__map_reserved["Arabic-lite"] != null) {
-			_g.setReserved("Arabic-lite",value7);
+			_g.setReserved("Arabic-lite",value6);
 		} else {
-			_g.h["Arabic-lite"] = value7;
+			_g.h["Arabic-lite"] = value6;
 		}
 	}
 	{
-		var value8 = "ptkbdgmnszʒʧhjw".split("");
+		var value7 = "ptkbdgmnszʒʧhjw".split("");
 		if(__map_reserved["English-lite"] != null) {
-			_g.setReserved("English-lite",value8);
+			_g.setReserved("English-lite",value7);
 		} else {
-			_g.h["English-lite"] = value8;
+			_g.h["English-lite"] = value7;
 		}
 	}
 	$r = _g;
@@ -4500,73 +4601,179 @@ dropecho_langgen_Consts.vowel_sets = (function($this) {
 	var _g = new haxe_ds_StringMap();
 	{
 		var value = "aeiou".split("");
-		if(__map_reserved["Test"] != null) {
-			_g.setReserved("Test",value);
+		if(__map_reserved["Default"] != null) {
+			_g.setReserved("Default",value);
 		} else {
-			_g.h["Test"] = value;
+			_g.h["Default"] = value;
 		}
 	}
 	{
-		var value1 = "aeiou".split("");
-		if(__map_reserved["Standard 5-vowel"] != null) {
-			_g.setReserved("Standard 5-vowel",value1);
-		} else {
-			_g.h["Standard 5-vowel"] = value1;
-		}
-	}
-	{
-		var value2 = "aiu".split("");
+		var value1 = "aiu".split("");
 		if(__map_reserved["3-vowel a i u"] != null) {
-			_g.setReserved("3-vowel a i u",value2);
+			_g.setReserved("3-vowel a i u",value1);
 		} else {
-			_g.h["3-vowel a i u"] = value2;
+			_g.h["3-vowel a i u"] = value1;
 		}
 	}
 	{
-		var value3 = "aeiouAEI".split("");
+		var value2 = "aeiouAEI".split("");
 		if(__map_reserved["Extra A E I"] != null) {
-			_g.setReserved("Extra A E I",value3);
+			_g.setReserved("Extra A E I",value2);
 		} else {
-			_g.h["Extra A E I"] = value3;
+			_g.h["Extra A E I"] = value2;
 		}
 	}
 	{
-		var value4 = "aeiouU".split("");
+		var value3 = "aeiouU".split("");
 		if(__map_reserved["Extra U"] != null) {
-			_g.setReserved("Extra U",value4);
+			_g.setReserved("Extra U",value3);
 		} else {
-			_g.h["Extra U"] = value4;
+			_g.h["Extra U"] = value3;
 		}
 	}
 	{
-		var value5 = "aiuAI".split("");
+		var value4 = "aiuAI".split("");
 		if(__map_reserved["5-vowel a i u A I"] != null) {
-			_g.setReserved("5-vowel a i u A I",value5);
+			_g.setReserved("5-vowel a i u A I",value4);
 		} else {
-			_g.h["5-vowel a i u A I"] = value5;
+			_g.h["5-vowel a i u A I"] = value4;
 		}
 	}
 	{
-		var value6 = "eou".split("");
+		var value5 = "eou".split("");
 		if(__map_reserved["3-vowel e o u"] != null) {
-			_g.setReserved("3-vowel e o u",value6);
+			_g.setReserved("3-vowel e o u",value5);
 		} else {
-			_g.h["3-vowel e o u"] = value6;
+			_g.h["3-vowel e o u"] = value5;
 		}
 	}
 	{
-		var value7 = "aeiouAOU".split("");
+		var value6 = "aeiouAOU".split("");
 		if(__map_reserved["Extra A O U"] != null) {
-			_g.setReserved("Extra A O U",value7);
+			_g.setReserved("Extra A O U",value6);
 		} else {
-			_g.h["Extra A O U"] = value7;
+			_g.h["Extra A O U"] = value6;
+		}
+	}
+	$r = _g;
+	return $r;
+}(this));
+dropecho_langgen_Consts.ssets = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	{
+		var value = ["s"];
+		if(__map_reserved["Just s"] != null) {
+			_g.setReserved("Just s",value);
+		} else {
+			_g.h["Just s"] = value;
+		}
+	}
+	{
+		var value1 = ["s","ʃ"];
+		if(__map_reserved["s ʃ"] != null) {
+			_g.setReserved("s ʃ",value1);
+		} else {
+			_g.h["s ʃ"] = value1;
+		}
+	}
+	{
+		var value2 = ["s","ʃ","f"];
+		if(__map_reserved["s ʃ f"] != null) {
+			_g.setReserved("s ʃ f",value2);
+		} else {
+			_g.h["s ʃ f"] = value2;
+		}
+	}
+	$r = _g;
+	return $r;
+}(this));
+dropecho_langgen_Consts.lsets = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	{
+		var value = "rl".split("");
+		if(__map_reserved["r l"] != null) {
+			_g.setReserved("r l",value);
+		} else {
+			_g.h["r l"] = value;
+		}
+	}
+	{
+		var value1 = "r".split("");
+		if(__map_reserved["Just r"] != null) {
+			_g.setReserved("Just r",value1);
+		} else {
+			_g.h["Just r"] = value1;
+		}
+	}
+	{
+		var value2 = "l".split("");
+		if(__map_reserved["Just l"] != null) {
+			_g.setReserved("Just l",value2);
+		} else {
+			_g.h["Just l"] = value2;
+		}
+	}
+	{
+		var value3 = "wj".split("");
+		if(__map_reserved["w j"] != null) {
+			_g.setReserved("w j",value3);
+		} else {
+			_g.h["w j"] = value3;
+		}
+	}
+	{
+		var value4 = "rlwj".split("");
+		if(__map_reserved["r l w j"] != null) {
+			_g.setReserved("r l w j",value4);
+		} else {
+			_g.h["r l w j"] = value4;
+		}
+	}
+	$r = _g;
+	return $r;
+}(this));
+dropecho_langgen_Consts.fsets = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	{
+		var value = "mn".split("");
+		if(__map_reserved["m n"] != null) {
+			_g.setReserved("m n",value);
+		} else {
+			_g.h["m n"] = value;
+		}
+	}
+	{
+		var value1 = "sk".split("");
+		if(__map_reserved["s k"] != null) {
+			_g.setReserved("s k",value1);
+		} else {
+			_g.h["s k"] = value1;
+		}
+	}
+	{
+		var value2 = "mnŋ".split("");
+		if(__map_reserved["m n ŋ"] != null) {
+			_g.setReserved("m n ŋ",value2);
+		} else {
+			_g.h["m n ŋ"] = value2;
+		}
+	}
+	{
+		var value3 = "sʃzʒ".split("");
+		if(__map_reserved["s ʃ z ʒ"] != null) {
+			_g.setReserved("s ʃ z ʒ",value3);
+		} else {
+			_g.h["s ʃ z ʒ"] = value3;
 		}
 	}
 	$r = _g;
 	return $r;
 }(this));
 dropecho_langgen_Consts.syllable_structures = ["CVC","CVV?C","CVVC?","CVC?","CV","VC","CVF","C?VC","CVF?","CL?VC","CL?VF","S?CVC","S?CVF","S?CVC?","C?VF","C?VC?","C?VF?","C?L?VC","VC","CVL?C?","C?VL?C","C?VLC?"];
-dropecho_langgen_Consts.phrase_structures = ["NS","DS","DSGN","DNGN","NGN","D?N","N?N","D?NN?","DNN?","D?NG?N","D?NNG?","D?NNG","D?NG?N?","D?G?NN"];
+dropecho_langgen_Consts.phrase_structures = ["DS","DSGN","DNGN","NGS","D?S","S?N","D?SN?","DSN?","D?SG?N","D?NSG?","D?NSG","D?SG?N?","D?G?NS"];
 dropecho_langgen_Consts.default_ortho = (function($this) {
 	var $r;
 	var _g = new haxe_ds_StringMap();

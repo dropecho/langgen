@@ -27,11 +27,17 @@
       padding: 10px;
   }
 
-  .container {
+  .row {
     flex: 1;
     display: flex;
     flex-direction: row;
   }
+  .column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
 
   body {
     display: flex;
@@ -44,13 +50,10 @@
 <body>
   <button id="generate" onClick="generate()">Generate another</button>
   <div id="langname"></div>
-  <div class="container">
-    <table id="config" style="">
-    </table>
-
-    <table id="words" style="">
-      <thead><th>Word</th><th>Meaning</th></thead>
-    </table>
+  <div class="row">
+    <table id="config"/>
+    <table id="words" />
+    <table id="phrases" />
   </div>
   <script src="./index.js"></script>
 </body>

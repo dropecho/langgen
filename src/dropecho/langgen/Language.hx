@@ -5,6 +5,8 @@ import seedyrng.Random;
 import dropecho.langgen.Consts;
 import dropecho.langgen.Spell;
 
+using StringTools;
+
 @:expose("Config")
 typedef LanguageConfig = {
 	// Phonemes
@@ -17,6 +19,8 @@ typedef LanguageConfig = {
 	// Structures
 	var syllable_structure:String;
 	var phrase_structure:String;
+	var word_length_min:Int;
+	var word_length_max:Int;
 }
 
 // "Spelling, i.e. the written script".
@@ -40,15 +44,18 @@ class Language {
 
 	public function new(?config:LanguageConfig) {
 		this.random = new Random();
+		var randommin:Int;
 
 		this.config = config != null ? config : {
 			consonants: Consts.getRandomConsonantSet(random),
 			vowels: Consts.getRandomVowelSet(random),
 			syllable_structure: Consts.getRandomSyllableStructure(random),
 			phrase_structure: Consts.getRandomPhraseStructure(random),
-			sset: [],
-			fset: [],
-			lset: [],
+			sset: Consts.getRandomSSet(random),
+			lset: Consts.getRandomLSet(random),
+			fset: Consts.getRandomFSet(random),
+			word_length_min: randommin = random.randomInt(1, 3),
+			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(0, 5))
 		};
 
 		spell = new Spell();
@@ -83,7 +90,14 @@ class Language {
 		].join("");
 	}
 
-	public function createWord(?key:String, ?min:Int = 2, ?max:Int = 4):String {
+	public function createWord(?key:String, ?min:Int, ?max:Int):String {
+		if (min == null) {
+			min = config.word_length_min;
+		}
+		if (max == null) {
+			max = config.word_length_max;
+		}
+
 		if (key != null && words.exists(key)) {
 			return words.get(key);
 		}
@@ -118,7 +132,11 @@ class Language {
 					case "G" | "?G":
 						genitive;
 					case "N" | "?N":
-						createWord();
+						if (this.random.random() > 0.2) {
+							words.get(random.choice([for (k in words.keys()) k].filter(x -> x != "the" && x != "of")));
+						} else {
+							createWord();
+						}
 					case "S":
 						subject != null ? subject : createWord(key);
 					case _:
@@ -131,10 +149,10 @@ class Language {
 	}
 
 	public function translate(text:String) {
-		var tokens = text.split(" ");
+		var tokens = text.trim().split(" ");
 
 		return [
-			for (x in tokens) {
+			for (x in tokens.filter(x -> x != null && x.length > 0)) {
 				var word = trans_words.exists(x) ? trans_words.get(x) : 'UNKNOWN';
 				x => word;
 			}

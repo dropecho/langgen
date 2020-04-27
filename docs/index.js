@@ -30,8 +30,6 @@ function generate(){
 
   let languagename = gen.createWord('language');
 
-  console.log(gen.config);
-
   var configtable = document.getElementById('config');
   configtable.innerHTML = '<thead><th>Config</th><th></th></thead>';
 
@@ -50,7 +48,13 @@ function generate(){
 
   addConfigRow('Vowels', gen.config.vowels.join(' '));
   addConfigRow('Consonants', gen.config.consonants.join(' '));
+  addConfigRow('S', gen.config.sset.join(' '));
+  addConfigRow('L', gen.config.lset.join(' '));
+  addConfigRow('F', gen.config.fset.join(' '));
   addConfigRow('Syllable Structure', gen.config.syllable_structure);
+  addConfigRow('Phrase Structure', gen.config.phrase_structure);
+  addConfigRow('min syllables in word', gen.config.word_length_min);
+  addConfigRow('max syllables in word', gen.config.word_length_max);
 
 
   document.getElementById('langname').innerHTML =
@@ -61,54 +65,51 @@ function generate(){
 
   wordTable.innerHTML = '<thead><th>Word</th><th>Meaning</th></thead>';
 
-  let ct = [];
-  for(let c in colors) {
-    let word = gen.createWord(colors[c]);
-    ct.push(word);
+  function addWordRow(orig, trans) {
     let row = document.createElement('tr');
-    let orig = document.createElement('td');
-    orig.innerText = colors[c];
-    let trans = document.createElement('td');
-    trans.innerText=word;
+    let origEl = document.createElement('td');
+    origEl.innerText = orig;
+    let transEl = document.createElement('td');
+    transEl.innerText = trans;
 
-    row.append(trans);
-    row.append(orig);
+    row.append(origEl);
+    row.append(transEl);
 
     wordTable.append(row);
   }
 
-  let tland= [];
-  for(let w in landmarks) {
-    let word = gen.createWord(landmarks[w]);
-    tland.push(word);
-    let row = document.createElement('tr');
-    let orig = document.createElement('td');
-    orig.innerText = landmarks[w];
-    let trans = document.createElement('td');
-    trans.innerText=word;
-
-    row.append(trans);
-    row.append(orig);
-
-    wordTable.append(row);
+  for(let i = 0; i < colors.length; i++) {
+    addWordRow(gen.createWord(colors[i]), colors[i]);
   }
 
-  let tadj = [];
-  for(let a in adjectives) {
-    let word = gen.createWord(adjectives[a]);
-    tadj.push(word);
-    let row = document.createElement('tr');
-    let orig = document.createElement('td');
-    orig.innerText = adjectives[a];
-    let trans = document.createElement('td');
-    trans.innerText=word;
-
-    row.append(trans);
-    row.append(orig);
-
-    wordTable.append(row);
+  for(let i = 0; i < landmarks.length; i++) {
+    addWordRow(gen.createWord(landmarks[i]), landmarks[i]);
   }
 
+  for(let i = 0; i < adjectives.length; i++) {
+    addWordRow(gen.createWord(adjectives[i]), adjectives[i]);
+  }
+
+  var phraseTable = document.getElementById('phrases');
+  phraseTable.innerHTML = '<thead><th>Phrases</th><th>Translated</th></thead>';
+  function addPhrase(orig) {
+    var row = document.createElement('tr');
+    phraseTable.append(row);
+
+    var configName = document.createElement('td');
+    configName.innerText = orig;
+    var configValue = document.createElement('td');
+    const foo = gen.translate(orig);
+    console.log('WHAT', foo);
+    configValue.innerText = Object.values(foo.h).join(' ');
+    row.append(configName);
+    row.append(configValue);
+  }
+
+  for(var i = 0; i < 10; i++) {
+    var place =gen.random.choice(landmarks);
+    addPhrase(gen.createPhrase(place));
+  }
 }
 
 generate();
