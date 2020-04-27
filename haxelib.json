@@ -9,8 +9,8 @@
 	"contributors": [
 		"vantreeseba"
 	],
-	"version": "0.2.0",
-	"releasenote": "Lots of tweaks",
+	"version": "0.3.0",
+	"releasenote": "Lots of cleanup, fix some rewrite rules, better example",
 	"tags": [
 		"text",
 		"game"
