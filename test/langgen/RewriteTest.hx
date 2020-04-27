@@ -159,4 +159,28 @@ class RewriteTest {
 
 		Assert.areEqual(expected, after);
 	}
+
+	@Test public function raw_rule() {
+		// replace double chars with D
+		rewriter.addRuleRaw("(.)\\1", "D");
+
+		var before = 'roogooi';
+		var expected = 'rDgDi';
+
+		var after = rewriter.rewrite(before);
+
+		Assert.areEqual(expected, after);
+	}
+
+	@Test public function raw_rule_2() {
+		// replace double chars with single of same char
+		rewriter.addRuleRaw("(.)\\1", '$1');
+
+		var before = 'rooguui';
+		var expected = 'rogui';
+
+		var after = rewriter.rewrite(before);
+
+		Assert.areEqual(expected, after);
+	}
 }

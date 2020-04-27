@@ -23,6 +23,10 @@ class Rewrite {
 		return rule;
 	}
 
+	public function addRuleRaw(regex:String, replaceWith:String) {
+		rules.set(new EReg(regex, 'g'), replaceWith);
+	}
+
 	public function addRule(char:String, rule:String, replaceWith:String) {
 		var reg = new EReg(parseRule(char, rule), 'g');
 		rules.set(reg, replaceWith);
@@ -31,9 +35,8 @@ class Rewrite {
 	public function rewrite(s:String) {
 		var after = s;
 		for (rule => replaceWith in rules) {
-      after = rule.replace(after, replaceWith);
+			after = rule.replace(after, replaceWith);
 		}
-
 		return after;
 	}
 }
