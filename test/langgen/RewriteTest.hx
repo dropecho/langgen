@@ -16,6 +16,7 @@ class RewriteTest {
 			fset: [],
 			sset: [],
 			lset: [],
+      rewriteset: [],
 			word_length_min: 1,
 			word_length_max: 5
 		};
@@ -150,10 +151,10 @@ class RewriteTest {
 	}
 
 	@Test public function end_of_word_2() {
-		rewriter.addRule("oo", "_V$", "ui");
+		rewriter.addRule("oo", "_(V)$", '$2');
 
 		var before = 'roogooi';
-		var expected = 'roogui';
+		var expected = 'roogi';
 
 		var after = rewriter.rewrite(before);
 
@@ -162,7 +163,7 @@ class RewriteTest {
 
 	@Test public function raw_rule() {
 		// replace double chars with D
-		rewriter.addRuleRaw("(.)\\1", "D");
+		rewriter.addRule("","(.)\\1", "D");
 
 		var before = 'roogooi';
 		var expected = 'rDgDi';
@@ -174,7 +175,7 @@ class RewriteTest {
 
 	@Test public function raw_rule_2() {
 		// replace double chars with single of same char
-		rewriter.addRuleRaw("(.)\\1", '$1');
+		rewriter.addRule("", "(.)\\1", '$1');
 
 		var before = 'rooguui';
 		var expected = 'rogui';

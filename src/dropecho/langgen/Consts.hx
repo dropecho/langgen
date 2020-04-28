@@ -89,6 +89,12 @@ class Consts {
 		'Doubles' => ['A' => 'aa', 'E' => 'ee', 'I' => 'ii', 'O' => 'oo', 'U' => 'uu']
 	];
 
+	static public var rewritesets = [
+		'None' => [],
+		'No double sounds' => [{character: "", rule: "(.)\\1", replaceWith: '$1'}],
+		'No vowels at end' => [{character: "", rule: "V$", replaceWith: ''}],
+	];
+
 	public static function getRandomCorthSet(random:Random) {
 		return corthsets.get(random.choice([for (k in corthsets.keys()) k]));
 	}
@@ -121,6 +127,11 @@ class Consts {
 	public static function getRandomLSet(random:Random) {
 		var keys = [for (x in lsets.keys()) x];
 		return lsets[random.choice(keys)];
+	}
+
+	public static function getRandomRewriteSet(random:Random) {
+		var keys = [for (x in rewritesets.keys()) x];
+		return rewritesets[random.choice(keys)];
 	}
 
 	public static function getRandomSyllableStructure(random:Random) {

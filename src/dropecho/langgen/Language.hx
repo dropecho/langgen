@@ -4,6 +4,7 @@ import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
 import dropecho.langgen.Spell;
+import dropecho.langgen.Rewrite;
 
 using StringTools;
 
@@ -15,6 +16,7 @@ typedef LanguageConfig = {
 	var lset:Array<String>;
 	var sset:Array<String>;
 	var fset:Array<String>;
+	var rewriteset:Array<Dynamic>;
 
 	// Structures
 	var syllable_structure:String;
@@ -33,6 +35,7 @@ typedef LanguageOrthography = {
 class Language {
 	public var random:Random;
 	public var spell:Spell;
+	public var rewrite:Rewrite;
 
 	public var config:LanguageConfig;
 
@@ -54,11 +57,17 @@ class Language {
 			sset: Consts.getRandomSSet(random),
 			lset: Consts.getRandomLSet(random),
 			fset: Consts.getRandomFSet(random),
+			rewriteset: Consts.getRandomRewriteSet(random),
 			word_length_min: randommin = random.randomInt(1, 2),
 			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
 		};
 
 		spell = new Spell();
+		rewrite = new Rewrite(this.config);
+
+    for(rule in this.config.rewriteset) {
+      rewrite.addRule(rule.character, rule.rule, rule.replaceWith);
+    }
 
 		// TODO: Extract this to something else.
 		genitive = createWord("of", 1, 1);
