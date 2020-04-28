@@ -91,8 +91,9 @@ class Consts {
 
 	static public var rewritesets = [
 		'None' => [],
-		'No double sounds' => [{character: "", rule: "(.)\\1", replaceWith: '$1'}],
-		'No vowels at end' => [{character: "", rule: "V$", replaceWith: ''}],
+		'No double sounds' => [{character: "", rule: "(.)\\1", replaceWith: "$1"}],
+		'No vowels at end' => [{character: "", rule: "V$", replaceWith: ""}],
+		'No u followed by vowels' => [{character: "u", rule: "_V", replaceWith: ""}],
 	];
 
 	public static function getRandomCorthSet(random:Random) {

@@ -2,14 +2,16 @@ package dropecho.langgen;
 
 import dropecho.langgen.Language.LanguageConfig;
 
-using StringTools;
-
 class Rewrite {
 	public var rules:Map<EReg, String> = new Map<EReg, String>();
 	public var config:LanguageConfig;
 
 	public function new(config:LanguageConfig) {
 		this.config = config;
+
+		for (rule in this.config.rewriteset) {
+			addRule(rule.character, rule.rule, rule.replaceWith);
+		}
 	}
 
 	public function parseRule(char:String, rule:String) {

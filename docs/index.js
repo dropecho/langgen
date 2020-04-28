@@ -58,6 +58,26 @@ function generate(){
   addConfigRow('min syllables in word', gen.config.word_length_min);
   addConfigRow('max syllables in word', gen.config.word_length_max);
 
+  var rewritetable = document.getElementById('rewrite');
+  rewritetable.innerHTML = '<thead><th>char</th><th>rule</th><th>Replace With</th></thead>';
+
+  function addRewriteRow(char, rule, replaceWith) {
+    var row = document.createElement('tr');
+    rewritetable.append(row);
+
+    var charEl = document.createElement('td');
+    charEl.innerText = char;
+    var ruleEl = document.createElement('td');
+    ruleEl.innerText = rule;
+    var replaceWithEl = document.createElement('td');
+    replaceWithEl.innerText = replaceWith;
+    row.append(charEl);
+    row.append(ruleEl);
+    row.append(replaceWithEl);
+  }
+
+  gen.config.rewriteset.forEach(r => addRewriteRow(r.character, r.rule, r.replaceWith));
+
 
   var orthoTable = document.getElementById('ortho');
   orthoTable.innerHTML = '<thead><th>Phoneme</th><th>Written</th></thead>';

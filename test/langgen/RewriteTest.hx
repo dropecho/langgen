@@ -16,7 +16,7 @@ class RewriteTest {
 			fset: [],
 			sset: [],
 			lset: [],
-      rewriteset: [],
+			rewriteset: [],
 			word_length_min: 1,
 			word_length_max: 5
 		};
@@ -163,7 +163,7 @@ class RewriteTest {
 
 	@Test public function raw_rule() {
 		// replace double chars with D
-		rewriter.addRule("","(.)\\1", "D");
+		rewriter.addRule("", "(.)\\1", "D");
 
 		var before = 'roogooi';
 		var expected = 'rDgDi';
@@ -176,6 +176,19 @@ class RewriteTest {
 	@Test public function raw_rule_2() {
 		// replace double chars with single of same char
 		rewriter.addRule("", "(.)\\1", '$1');
+
+		var before = 'rooguui';
+		var expected = 'rogui';
+
+		var after = rewriter.rewrite(before);
+
+		Assert.areEqual(expected, after);
+	}
+
+	@Test public function raw_rule_3() {
+		// replace double chars with single char
+		var rule = Consts.rewritesets.get("No double sounds")[0];
+		rewriter.addRule(rule.character, rule.rule, rule.replaceWith);
 
 		var before = 'rooguui';
 		var expected = 'rogui';

@@ -65,9 +65,6 @@ class Language {
 		spell = new Spell();
 		rewrite = new Rewrite(this.config);
 
-    for(rule in this.config.rewriteset) {
-      rewrite.addRule(rule.character, rule.rule, rule.replaceWith);
-    }
 
 		// TODO: Extract this to something else.
 		genitive = createWord("of", 1, 1);
@@ -116,7 +113,7 @@ class Language {
 
 		var word = [for (_ in 0...random.randomInt(min, max)) createSyllable()].join("");
 
-		word = spell.spell(word);
+		word = spell.spell(rewrite.rewrite(word));
 
 		if (key != null && !words.exists(key)) {
 			words.set(key, word);
