@@ -1,6 +1,16 @@
+## 0.4.0 (2020-04-28)
+
+* FEAT: Add raw rule to rewriter. ([3cb730a](https://github.com/dropecho/langgen/commit/3cb730a))
+* FEAT: Fix rewrite rules ([e081f52](https://github.com/dropecho/langgen/commit/e081f52))
+* Add rewrite rules and config ([7f8b7b1](https://github.com/dropecho/langgen/commit/7f8b7b1))
+
+
+
 ## 0.3.0 (2020-04-27)
 
 * Lots of cleanup, fix some rewrite rules, better example ([146751b](https://github.com/dropecho/langgen/commit/146751b))
+* Release 0.3.0 ([2dd4ec2](https://github.com/dropecho/langgen/commit/2dd4ec2))
+* version ([7d97a5f](https://github.com/dropecho/langgen/commit/7d97a5f))
 
 
 
