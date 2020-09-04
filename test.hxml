@@ -55,15 +55,15 @@
 # -java build/java_test
 
 # CSharp
---next
--main TestMain
--lib munit
--lib hamcrest
--lib seedyrng
--cp src
-
--cp test
--cs build/cs_test
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -lib seedyrng
+# -cp src
+#
+# -cp test
+# -cs build/cs_test
 
 # ## Python
 # --next
@@ -87,7 +87,7 @@
 # -php build/php_test
 
 # ## JavaScript NodeJS
---next
+# --next
 -main TestMain
 -lib munit
 -lib hamcrest
