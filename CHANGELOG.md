@@ -1,3 +1,15 @@
+# [0.5.0](https://github.com/dropecho/langgen/compare/0.4.0...0.5.0) (2020-09-04)
+
+
+### Bug Fixes
+
+* Add package-lock.json ([3f03b1f](https://github.com/dropecho/langgen/commit/3f03b1f35f153df3ba2e6c5bbe9e070274cc37f5))
+
+
+### Features
+
+* Fix tests and add semantic release. ([8f191c6](https://github.com/dropecho/langgen/commit/8f191c664cec1353230ce6af500191f74156d7aa))
+
 ## 0.4.0 (2020-04-28)
 
 * FEAT: Add raw rule to rewriter. ([3cb730a](https://github.com/dropecho/langgen/commit/3cb730a))
@@ -52,6 +64,3 @@
 * Initial commit ([b0a3ac3](https://github.com/dropecho/langgen/commit/b0a3ac3))
 * Release 0.1.0 ([e603cd3](https://github.com/dropecho/langgen/commit/e603cd3))
 * version ([3cef7db](https://github.com/dropecho/langgen/commit/3cef7db))
-
-
-
