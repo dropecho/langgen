@@ -151,7 +151,6 @@ function generate(){
     configName.innerText = orig;
     var configValue = document.createElement('td');
     const foo = gen.translate(orig);
-    console.log('WHAT', foo);
     configValue.innerText = Object.values(foo.h).join(' ');
     row.append(configName);
     row.append(configValue);

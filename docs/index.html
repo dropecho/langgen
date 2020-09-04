@@ -1,63 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <script src="./langgen.js"></script>
-<style type="text/css">
-  table {
-    flex:1;
-    width: 400px;
-    border:1px solid black;
-    border-collapse:collapse;
+  <style type="text/css">
+    :root {
+      --bg-color-primary: #f0f0f0;
+      --bg-color-secondary: #ccc;
+    }
+
+    body {
+      background-color: var(--bg-color-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button {
+      background-color: var(--bg-color-primary);
+      filter: brightness(105%);
+    }
+
+    table {
+      flex: 1;
+      width: 400px;
+      border-collapse: collapse;
       margin: 10px;
-  }
-  tr {
-    margin: 20px;
-    border:1px solid black;
-    border-collapse:collapse;
-  }
-  td {
-    margin: 20px;
-    padding: 10px;
-    border:1px solid black;
-  }
+    }
 
-  #langname , #generate {
-    font-size: 24px;
+    th {
+      background-color: var(--bg-color-primary);
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    tr {
+      margin: 10px;
+      border-collapse: collapse;
+    }
+
+    tr:nth-child(2n) {
+      background-color: var(--bg-color-secondary);
+    }
+
+    td {
+      margin: 10px;
+      padding: 5px;
+      padding-left: 10px;
+    }
+
+    #langname,
+    #generate {
+      font-size: 24px;
       padding: 10px;
-  }
+    }
 
-  .row {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-  }
-  .column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+    .row {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+    }
 
-
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-</style>
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
 </head>
+
 <body>
-  <button id="generate" onClick="generate()">Generate another</button>
-  <div id="langname"></div>
+  <div class="row">
+    <button id="generate" onClick="generate()">Generate another</button>
+    <div id="langname"></div>
+  </div>
   <div class="row">
     <div class="column">
       <table id="config"></table>
       <table id="rewrite"></table>
       <table id="ortho"></table>
     </div>
-      <table id="words"></table>
-      <table id="phrases"></table>
+    <table id="words"></table>
+    <table id="phrases"></table>
   </div>
   <script src="./index.js"></script>
 </body>
