@@ -1,19 +1,19 @@
 {
-	"name": "dropecho.langgen",
-	"description": "A naming language generator.",
-	"classPath": "src/",
-	"dependencies": {
-		"seedyrng": ""
-	},
-	"url": "https://github.com/dropecho/storygen/",
-	"contributors": [
-		"vantreeseba"
-	],
-	"version": "0.4.0",
-	"releasenote": "FEAT: Fix rewrite rules",
-	"tags": [
-		"text",
-		"game"
-	],
-	"license": "MIT"
+  "name": "dropecho.langgen",
+  "description": "A naming language generator.",
+  "classPath": "src/",
+  "dependencies": {
+    "seedyrng": ""
+  },
+  "url": "https://github.com/dropecho/storygen/",
+  "contributors": [
+    "vantreeseba"
+  ],
+  "version": "0.5.0",
+  "releasenote": "FEAT: Fix rewrite rules",
+  "tags": [
+    "text",
+    "game"
+  ],
+  "license": "MIT"
 }
