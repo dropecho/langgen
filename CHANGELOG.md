@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/dropecho/langgen/compare/0.5.0...0.6.0) (2020-09-10)
+
+
+### Features
+
+* Ensure seed / output is deterministic. ([f8af3c0](https://github.com/dropecho/langgen/commit/f8af3c0e9d86bc36ce46bd1969b9bcf59ef0e913))
+
 # [0.5.0](https://github.com/dropecho/langgen/compare/0.4.0...0.5.0) (2020-09-04)
 
 
