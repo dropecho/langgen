@@ -1,7 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const seedParam = urlParams.get('seed');
 
-console.log('yo', seedParam);
+function createSeed() {
+  var newSeed = Math.round(Math.random() * 100000000000);
+  urlParams.set('seed', newSeed);
+  window.location.search = urlParams;
+}
 
 function generate(seed) {
   let gen = new Language(null, seed);
