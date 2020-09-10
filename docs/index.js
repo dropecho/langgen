@@ -1,5 +1,10 @@
-function generate(){
-  let gen = new Language();
+const urlParams = new URLSearchParams(window.location.search);
+const seedParam = urlParams.get('seed');
+
+console.log('yo', seedParam);
+
+function generate(seed) {
+  let gen = new Language(null, seed);
 
   let colors = [
     'blue',
@@ -31,7 +36,7 @@ function generate(){
   let languagename = gen.createWord('language');
 
   document.getElementById('langname').innerHTML =
-    `The language of ${ languagename }`;
+    `The language of ${languagename}`;
 
   var configtable = document.getElementById('config');
   configtable.innerHTML = '<thead><th>Config</th><th></th></thead>';
@@ -100,14 +105,14 @@ function generate(){
     .concat(gen.config.lset)
     .concat(gen.config.fset)
     .reduce((a, b) => {
-      if(a.indexOf(b) === -1) {
+      if (a.indexOf(b) === -1) {
         a.push(b);
       }
 
       return a;
     }, []);
 
-  for(let i = 0; i < letters.length; i++) {
+  for (let i = 0; i < letters.length; i++) {
     addOrthoRow(letters[i], gen.spell.spell(letters[i]));
   }
 
@@ -129,15 +134,15 @@ function generate(){
     wordTable.append(row);
   }
 
-  for(let i = 0; i < colors.length; i++) {
+  for (let i = 0; i < colors.length; i++) {
     addWordRow(gen.createWord(colors[i]), colors[i]);
   }
 
-  for(let i = 0; i < landmarks.length; i++) {
+  for (let i = 0; i < landmarks.length; i++) {
     addWordRow(gen.createWord(landmarks[i]), landmarks[i]);
   }
 
-  for(let i = 0; i < adjectives.length; i++) {
+  for (let i = 0; i < adjectives.length; i++) {
     addWordRow(gen.createWord(adjectives[i]), adjectives[i]);
   }
 
@@ -156,10 +161,10 @@ function generate(){
     row.append(configValue);
   }
 
-  for(var i = 0; i < 10; i++) {
-    var place =gen.random.choice(landmarks);
+  for (var i = 0; i < 10; i++) {
+    var place = gen.random.choice(landmarks);
     addPhrase(gen.createPhrase(place));
   }
 }
 
-generate();
+generate(seedParam);

@@ -1,5 +1,6 @@
 package dropecho.langgen;
 
+import haxe.Int64Helper;
 import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
@@ -45,8 +46,11 @@ class Language {
 	public var genitive:String;
 	public var definite:String;
 
-	public function new(?config:LanguageConfig) {
+	public function new(?config:LanguageConfig, ?seed:String) {
 		this.random = new Random();
+		if (seed != null) {
+			this.random.setStringSeed(seed);
+		}
 		var randommin:Int;
 
 		this.config = config != null ? config : {
@@ -62,9 +66,8 @@ class Language {
 			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
 		};
 
-		spell = new Spell();
+		spell = new Spell(null, seed);
 		rewrite = new Rewrite(this.config);
-
 
 		// TODO: Extract this to something else.
 		genitive = createWord("of", 1, 1);
@@ -146,7 +149,8 @@ class Language {
 						genitive;
 					case "N":
 						var choices = [for (k in words.keys()) k].filter(x -> x != "the" && x != "of");
-						if (this.random.random() > 0.2 && choices.length > 0) {
+						// if (this.random.random() > 0.2 && choices.length > 0) {
+						if (choices.length > 0) {
 							words.get(random.choice(choices));
 						} else {
 							createWord();

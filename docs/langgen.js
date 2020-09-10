@@ -1299,10 +1299,13 @@ class dropecho_langgen_Consts {
 $hxClasses["dropecho.langgen.Consts"] = $hx_exports["Consts"] = dropecho_langgen_Consts;
 dropecho_langgen_Consts.__name__ = "dropecho.langgen.Consts";
 class dropecho_langgen_Language {
-	constructor(config) {
+	constructor(config,seed) {
 		this.trans_words = new haxe_ds_StringMap();
 		this.words = new haxe_ds_StringMap();
 		this.random = new seedyrng_Random();
+		if(seed != null) {
+			this.random.setStringSeed(seed);
+		}
 		let randommin;
 		let tmp;
 		if(config != null) {
@@ -1320,7 +1323,7 @@ class dropecho_langgen_Language {
 			tmp = { consonants : tmp1, vowels : tmp2, syllable_structure : tmp3, phrase_structure : tmp4, sset : tmp5, lset : tmp6, fset : tmp7, rewriteset : tmp8, word_length_min : randommin, word_length_max : this.random.randomInt(randommin + 1,randommin + this.random.randomInt(1,4))};
 		}
 		this.config = tmp;
-		this.spell = new dropecho_langgen_Spell();
+		this.spell = new dropecho_langgen_Spell(null,seed);
 		this.rewrite = new dropecho_langgen_Rewrite(this.config);
 		this.genitive = this.createWord("of",1,1);
 		this.definite = this.createWord("the",1,1);
@@ -1432,7 +1435,7 @@ class dropecho_langgen_Language {
 					}
 				}
 				let choices = _g3;
-				if(this.random.random() > 0.2 && choices.length > 0) {
+				if(choices.length > 0) {
 					let _this = this.words;
 					let key = this.random.choice(choices);
 					phrase = _this.h[key];
@@ -1535,8 +1538,11 @@ Object.assign(dropecho_langgen_Rewrite.prototype, {
 	,config: null
 });
 class dropecho_langgen_Spell {
-	constructor(ortho) {
+	constructor(ortho,seed) {
 		let random = new seedyrng_Random();
+		if(seed != null) {
+			random.setStringSeed(seed);
+		}
 		if(ortho == null) {
 			this.ortho = { consonants : dropecho_langgen_Consts.getRandomCorthSet(random), vowels : dropecho_langgen_Consts.getRandomVorthSet(random)};
 		} else {

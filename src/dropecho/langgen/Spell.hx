@@ -7,8 +7,11 @@ import dropecho.langgen.Language.LanguageOrthography;
 class Spell {
 	public var ortho:LanguageOrthography;
 
-	public function new(?ortho:LanguageOrthography) {
+	public function new(?ortho:LanguageOrthography, ?seed:String) {
 		var random = new Random();
+		if (seed != null) {
+			random.setStringSeed(seed);
+		}
 		if (ortho == null) {
 			this.ortho = {
 				consonants: Consts.getRandomCorthSet(random),

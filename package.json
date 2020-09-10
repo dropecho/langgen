@@ -11,7 +11,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "haxe build.hxml",
+    "build": "haxe build.hxml && cp dist/js/index.js docs/langgen.js",
     "test": "haxelib run munit t",
     "test-debug": "haxelib run munit t -debug"
   },
