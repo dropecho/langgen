@@ -9,13 +9,13 @@ class RewriteTest {
 	@Before
 	public function setup() {
 		var config = {
-			consonants: Consts.consonant_sets['Minimal'],
-			vowels: Consts.vowel_sets['Default'],
 			syllable_structure: Consts.syllable_structures[0],
 			phrase_structure: Consts.phrase_structures[0],
-			fset: [],
-			sset: [],
-			lset: [],
+			consonants: Consts.consonant_sets['Minimal'],
+			vowels: Consts.vowel_sets['Default'],
+			finals: [],
+			sibilants: [],
+			liquids: [],
 			rewriteset: [],
 			word_length_min: 1,
 			word_length_max: 5

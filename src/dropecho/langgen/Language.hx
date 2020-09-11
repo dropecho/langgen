@@ -1,6 +1,5 @@
 package dropecho.langgen;
 
-import haxe.Int64Helper;
 import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
@@ -14,9 +13,9 @@ typedef LanguageConfig = {
 	// Phonemes
 	var consonants:Array<String>;
 	var vowels:Array<String>;
-	var lset:Array<String>;
-	var sset:Array<String>;
-	var fset:Array<String>;
+	var liquids:Array<String>;
+	var sibilants:Array<String>;
+	var finals:Array<String>;
 	var rewriteset:Array<Dynamic>;
 
 	// Structures
@@ -58,9 +57,9 @@ class Language {
 			vowels: Consts.getRandomVowelSet(random),
 			syllable_structure: Consts.getRandomSyllableStructure(random),
 			phrase_structure: Consts.getRandomPhraseStructure(random),
-			sset: Consts.getRandomSSet(random),
-			lset: Consts.getRandomLSet(random),
-			fset: Consts.getRandomFSet(random),
+			sibilants: Consts.getRandomSibilantSet(random),
+			liquids: Consts.getRandomLiquidSet(random),
+			finals: Consts.getRandomFinalSet(random),
 			rewriteset: Consts.getRandomRewriteSet(random),
 			word_length_min: randommin = random.randomInt(1, 2),
 			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
@@ -90,11 +89,11 @@ class Language {
 					case "V":
 						random.choice(config.vowels);
 					case "S":
-						random.choice(config.sset);
+						random.choice(config.sibilants);
 					case "L":
-						random.choice(config.lset);
+						random.choice(config.liquids);
 					case "F":
-						random.choice(config.fset);
+						random.choice(config.finals);
 					case _:
 						"";
 				}

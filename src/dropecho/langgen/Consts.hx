@@ -25,9 +25,9 @@ class Consts {
 		'Extra A O U' => 'aeiouAOU'.split("")
 	];
 
-	static public var ssets = ['Just s' => ['s'], 's ʃ' => ['s', 'ʃ'], 's ʃ f' => ['s', 'ʃ', 'f']];
+	static public var sibilant_sets = ['Just s' => ['s'], 's ʃ' => ['s', 'ʃ'], 's ʃ f' => ['s', 'ʃ', 'f']];
 
-	static public var lsets = [
+	static public var liquid_sets = [
 		'r l' => 'rl'.split(""),
 		'Just r' => 'r'.split(""),
 		'Just l' => 'l'.split(""),
@@ -35,7 +35,7 @@ class Consts {
 		'r l w j' => 'rlwj'.split("")
 	];
 
-	static public var fsets = [
+	static public var final_sets = [
 		'm n' => 'mn'.split(""),
 		's k' => 'sk'.split(""),
 		'm n ŋ' => 'mnŋ'.split(""),
@@ -45,9 +45,9 @@ class Consts {
 	/*
 	 * C = consonant
 	 * V = vowel
-	 * L = l sound
-	 * F = f sound
-	 * S = s sound
+	 * L = liquid
+	 * F = final
+	 * S = sibilant
 	 */
 	public static var syllable_structures:Array<String> = [
 		'CVC', 'CVV?C', 'CVVC?', 'CVC?', 'CV', 'VC', 'CVF', 'C?VC', 'CVF?', 'CL?VC', 'CL?VF', 'S?CVC', 'S?CVF', 'S?CVC?', 'C?VF', 'C?VC?', 'C?VF?', 'C?L?VC',
@@ -106,7 +106,6 @@ class Consts {
 
 	public static function getRandomConsonantSet(random:Random) {
 		var keys = [for (x in consonant_sets.keys()) x];
-
 		return consonant_sets[random.choice(keys)];
 	}
 
@@ -115,19 +114,19 @@ class Consts {
 		return vowel_sets[random.choice(keys)];
 	}
 
-	public static function getRandomSSet(random:Random) {
-		var keys = [for (x in ssets.keys()) x];
-		return ssets[random.choice(keys)];
+	public static function getRandomSibilantSet(random:Random) {
+		var keys = [for (x in sibilant_sets.keys()) x];
+		return sibilant_sets[random.choice(keys)];
 	}
 
-	public static function getRandomFSet(random:Random) {
-		var keys = [for (x in fsets.keys()) x];
-		return fsets[random.choice(keys)];
+	public static function getRandomFinalSet(random:Random) {
+		var keys = [for (x in final_sets.keys()) x];
+		return final_sets[random.choice(keys)];
 	}
 
-	public static function getRandomLSet(random:Random) {
-		var keys = [for (x in lsets.keys()) x];
-		return lsets[random.choice(keys)];
+	public static function getRandomLiquidSet(random:Random) {
+		var keys = [for (x in liquid_sets.keys()) x];
+		return liquid_sets[random.choice(keys)];
 	}
 
 	public static function getRandomRewriteSet(random:Random) {

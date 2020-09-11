@@ -1241,39 +1241,39 @@ class dropecho_langgen_Consts {
 		let key = random.choice(keys);
 		return this1.h[key];
 	}
-	static getRandomSSet(random) {
+	static getRandomSibilantSet(random) {
 		let _g = [];
-		let x = haxe_ds_StringMap.keysIterator(dropecho_langgen_Consts.ssets.h);
+		let x = haxe_ds_StringMap.keysIterator(dropecho_langgen_Consts.sibilant_sets.h);
 		while(x.hasNext()) {
 			let x1 = x.next();
 			_g.push(x1);
 		}
 		let keys = _g;
-		let this1 = dropecho_langgen_Consts.ssets;
+		let this1 = dropecho_langgen_Consts.sibilant_sets;
 		let key = random.choice(keys);
 		return this1.h[key];
 	}
-	static getRandomFSet(random) {
+	static getRandomFinalSet(random) {
 		let _g = [];
-		let x = haxe_ds_StringMap.keysIterator(dropecho_langgen_Consts.fsets.h);
+		let x = haxe_ds_StringMap.keysIterator(dropecho_langgen_Consts.final_sets.h);
 		while(x.hasNext()) {
 			let x1 = x.next();
 			_g.push(x1);
 		}
 		let keys = _g;
-		let this1 = dropecho_langgen_Consts.fsets;
+		let this1 = dropecho_langgen_Consts.final_sets;
 		let key = random.choice(keys);
 		return this1.h[key];
 	}
-	static getRandomLSet(random) {
+	static getRandomLiquidSet(random) {
 		let _g = [];
-		let x = haxe_ds_StringMap.keysIterator(dropecho_langgen_Consts.lsets.h);
+		let x = haxe_ds_StringMap.keysIterator(dropecho_langgen_Consts.liquid_sets.h);
 		while(x.hasNext()) {
 			let x1 = x.next();
 			_g.push(x1);
 		}
 		let keys = _g;
-		let this1 = dropecho_langgen_Consts.lsets;
+		let this1 = dropecho_langgen_Consts.liquid_sets;
 		let key = random.choice(keys);
 		return this1.h[key];
 	}
@@ -1315,12 +1315,12 @@ class dropecho_langgen_Language {
 			let tmp2 = dropecho_langgen_Consts.getRandomVowelSet(this.random);
 			let tmp3 = dropecho_langgen_Consts.getRandomSyllableStructure(this.random);
 			let tmp4 = dropecho_langgen_Consts.getRandomPhraseStructure(this.random);
-			let tmp5 = dropecho_langgen_Consts.getRandomSSet(this.random);
-			let tmp6 = dropecho_langgen_Consts.getRandomLSet(this.random);
-			let tmp7 = dropecho_langgen_Consts.getRandomFSet(this.random);
+			let tmp5 = dropecho_langgen_Consts.getRandomSibilantSet(this.random);
+			let tmp6 = dropecho_langgen_Consts.getRandomLiquidSet(this.random);
+			let tmp7 = dropecho_langgen_Consts.getRandomFinalSet(this.random);
 			let tmp8 = dropecho_langgen_Consts.getRandomRewriteSet(this.random);
 			randommin = this.random.randomInt(1,2);
-			tmp = { consonants : tmp1, vowels : tmp2, syllable_structure : tmp3, phrase_structure : tmp4, sset : tmp5, lset : tmp6, fset : tmp7, rewriteset : tmp8, word_length_min : randommin, word_length_max : this.random.randomInt(randommin + 1,randommin + this.random.randomInt(1,4))};
+			tmp = { consonants : tmp1, vowels : tmp2, syllable_structure : tmp3, phrase_structure : tmp4, sibilants : tmp5, liquids : tmp6, finals : tmp7, rewriteset : tmp8, word_length_min : randommin, word_length_max : this.random.randomInt(randommin + 1,randommin + this.random.randomInt(1,4))};
 		}
 		this.config = tmp;
 		this.spell = new dropecho_langgen_Spell(null,seed);
@@ -1347,13 +1347,13 @@ class dropecho_langgen_Language {
 				tmp = this.random.choice(this.config.consonants);
 				break;
 			case "F":
-				tmp = this.random.choice(this.config.fset);
+				tmp = this.random.choice(this.config.finals);
 				break;
 			case "L":
-				tmp = this.random.choice(this.config.lset);
+				tmp = this.random.choice(this.config.liquids);
 				break;
 			case "S":
-				tmp = this.random.choice(this.config.sset);
+				tmp = this.random.choice(this.config.sibilants);
 				break;
 			case "V":
 				tmp = this.random.choice(this.config.vowels);
@@ -5031,7 +5031,7 @@ dropecho_langgen_Consts.vowel_sets = (function($this) {
 	$r = _g;
 	return $r;
 }(this));
-dropecho_langgen_Consts.ssets = (function($this) {
+dropecho_langgen_Consts.sibilant_sets = (function($this) {
 	var $r;
 	let _g = new haxe_ds_StringMap();
 	_g.h["Just s"] = ["s"];
@@ -5040,7 +5040,7 @@ dropecho_langgen_Consts.ssets = (function($this) {
 	$r = _g;
 	return $r;
 }(this));
-dropecho_langgen_Consts.lsets = (function($this) {
+dropecho_langgen_Consts.liquid_sets = (function($this) {
 	var $r;
 	let _g = new haxe_ds_StringMap();
 	_g.h["r l"] = "rl".split("");
@@ -5051,7 +5051,7 @@ dropecho_langgen_Consts.lsets = (function($this) {
 	$r = _g;
 	return $r;
 }(this));
-dropecho_langgen_Consts.fsets = (function($this) {
+dropecho_langgen_Consts.final_sets = (function($this) {
 	var $r;
 	let _g = new haxe_ds_StringMap();
 	_g.h["m n"] = "mn".split("");

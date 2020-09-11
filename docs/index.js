@@ -59,9 +59,9 @@ function generate(seed) {
 
   addConfigRow('Vowels', gen.config.vowels.join(' '));
   addConfigRow('Consonants', gen.config.consonants.join(' '));
-  addConfigRow('S', gen.config.sset.join(' '));
-  addConfigRow('L', gen.config.lset.join(' '));
-  addConfigRow('F', gen.config.fset.join(' '));
+  addConfigRow('Sibilants', gen.config.sibilants.join(' '));
+  addConfigRow('Liquids', gen.config.liquids.join(' '));
+  addConfigRow('Finals', gen.config.finals.join(' '));
   addConfigRow('Syllable Structure', gen.config.syllable_structure);
   addConfigRow('Phrase Structure', gen.config.phrase_structure);
   addConfigRow('min syllables in word', gen.config.word_length_min);
@@ -105,9 +105,9 @@ function generate(seed) {
 
   var letters = gen.config.vowels
     .concat(gen.config.consonants)
-    .concat(gen.config.sset)
-    .concat(gen.config.lset)
-    .concat(gen.config.fset)
+    .concat(gen.config.sibilants)
+    .concat(gen.config.liquids)
+    .concat(gen.config.finals)
     .reduce((a, b) => {
       if (a.indexOf(b) === -1) {
         a.push(b);
@@ -169,6 +169,10 @@ function generate(seed) {
     var place = gen.random.choice(landmarks);
     addPhrase(gen.createPhrase(place));
   }
+}
+
+if(!seedParam) {
+  createSeed();
 }
 
 generate(seedParam);
