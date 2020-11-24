@@ -4,10 +4,9 @@
   "description": "",
   "author": "vantreeseba <vantreeseba@gmail.com>",
   "repository": "github:dropecho/langgen",
-  "main": "dist/js/index.js",
-  "browser": "dist/js/langgen.js",
+  "main": "dist/js/langgen.js",
   "files": [
-    "dist/js/index.js"
+    "dist/js/langgen.js"
   ],
   "license": "MIT",
   "scripts": {
@@ -24,6 +23,6 @@
     "@semantic-release/npm": "^7.0.5",
     "@semantic-release/release-notes-generator": "^9.0.1",
     "semantic-release": "^17.1.1",
-    "semantic-release-haxelib": "^0.3.1"
+    "semantic-release-haxelib": "^0.4.0"
   }
 }

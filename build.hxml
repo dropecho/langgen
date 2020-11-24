@@ -1,7 +1,7 @@
 ## JS (node)
 -cp src
-# -D dce=full
--D dce=no
+-D dce=full
+# -D dce=no
 -D js-es=6
 
 -lib seedyrng
@@ -9,7 +9,7 @@
 --macro include('', true, null, ['src'])
 
 # OUTPUT 
--js dist/js/index.js 
+-js dist/js/langgen.js 
 
 # --next
 
