@@ -1,0 +1,132 @@
+:root {
+  --bg-color-primary: #f0f0f0;
+  --bg-color-secondary: #ccc;
+}
+
+body {
+  text-align: center;
+  background-color: var(--bg-color-primary);
+}
+
+button {
+  background-color: var(--bg-color-primary);
+  filter: brightness(105%);
+}
+
+table {
+  width: 400px;
+  border-collapse: collapse;
+  margin: 10px;
+}
+
+th {
+  background-color: var(--bg-color-primary);
+  text-align: left;
+  padding-left: 10px;
+}
+
+tr {
+  margin: 10px;
+  border-collapse: collapse;
+}
+
+tr:nth-child(2n) {
+  background-color: var(--bg-color-secondary);
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 10px;
+}
+
+td {
+  margin: 10px;
+  padding: 5px;
+  padding-left: 10px;
+}
+
+.tooltip {
+  width: 0px;
+  display: hidden;
+  opacity: 0;
+  position: absolute;
+  padding: 10px;
+  margin-top: -5px; /* half of padding */
+  margin-left: -300px;
+  background-color: var(--bg-color-primary);
+  border: black 2px solid;
+  border-radius: 5px;
+  max-width: 350px;
+}
+
+.tooltip:after {
+  content: '';
+  position: absolute;
+
+  /* position tooltip correctly */
+  left: 0;
+  margin-left: -20px;
+
+  /* vertically center */
+  top: 10px;
+
+  /* the arrow */
+  border: 10px solid #000;
+  border-color: transparent black transparent transparent;
+}
+
+/* tr:hover > .tooltip { */
+/*   width: auto; */
+/*   display: inline; */
+/*   opacity: 1; */
+/*   [> transition:.1s; <] */
+/* } */
+
+#langname,
+#generate {
+  font-size: 24px;
+  padding: 10px;
+}
+
+.parent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 20px;
+  column-gap: 10px;
+}
+
+@media (min-width: 1400px) {
+  .parent-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 850px) {
+  .parent-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+#phrases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column: 1 / -1;
+}
+
+.phrase {
+  text-align: center;
+  display: inline;
+  padding: 10px;
+  font-size: 1.25rem;
+}
+
+ruby {
+  text-align: left;
+  padding: 5px;
+  ruby-position: under;
+}
+rt {
+  font-size: 0.8rem;
+}
+rt span.token {
+  text-decoration: underline dotted;
+}

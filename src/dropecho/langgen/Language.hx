@@ -39,7 +39,9 @@ class Language {
 
 	public var config:LanguageConfig;
 
+	public var syllables:Array<String> = new Array<String>();
 	public var words:StringMap<String> = new StringMap<String>();
+	public var words_ipa:StringMap<String> = new StringMap<String>();
 	public var trans_words:StringMap<String> = new StringMap<String>();
 
 	public var genitive:String;
@@ -75,7 +77,7 @@ class Language {
 
 	public function createSyllable():String {
 		var split = config.syllable_structure.split("");
-		return [
+		var syl = [
 			for (x in 0...split.length) {
 				if (split[x] == "?")
 					continue;
@@ -99,6 +101,8 @@ class Language {
 				}
 			}
 		].join("");
+
+		return syl;
 	}
 
 	public function createWord(?key:String, ?min:Int, ?max:Int):String {
@@ -115,11 +119,13 @@ class Language {
 
 		var word = [for (_ in 0...random.randomInt(min, max)) createSyllable()].join("");
 
+		var orig = word;
 		word = spell.spell(rewrite.rewrite(word));
 
 		if (key != null && !words.exists(key)) {
 			words.set(key, word);
 			trans_words.set(word, key);
+			words_ipa.set(word, orig);
 		}
 
 		return word;
