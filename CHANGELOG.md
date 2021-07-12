@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/dropecho/langgen/compare/0.6.0...0.6.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* fix build command. ([5337a85](https://github.com/dropecho/langgen/commit/5337a854dec39e9236f45f70e9bdc6e8d63ec61f))
+* Fix issue with npm package being empty. ([0f300bd](https://github.com/dropecho/langgen/commit/0f300bdd8ac734dd0de9dda20a8e3eeb40b76401))
+* make action install required libs before build. ([701a75c](https://github.com/dropecho/langgen/commit/701a75c86b63d6745157f220b0b5ecfee5649462))
+
 # [0.6.0](https://github.com/dropecho/langgen/compare/0.5.0...0.6.0) (2020-09-10)
 
 
