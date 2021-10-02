@@ -1,4 +1,4 @@
-# Naming language generator
+# LangGen
 
 This is code for generating a 'naming language', based on the algorithm behind [@unchartedatlas][uncharted].
 
