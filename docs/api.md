@@ -6,7 +6,7 @@ config.
 <!-- panels:start -->
 <!-- div:title-panel -->
 
-#### Language(config:?[LanguageConfig][], seed:?string)
+### Language(config:?[LanguageConfig][], seed:?string)
 
 <!-- div:left-panel -->
 
@@ -20,7 +20,7 @@ config.
 <!-- panels:start -->
 <!-- div:title-panel -->
 
-#### Language.createSyllable() => String
+### Language.createSyllable() => String
 
 <!-- div:left-panel -->
 
@@ -34,7 +34,7 @@ Creates a syllable from the language.
 <!-- panels:start -->
 <!-- div:title-panel -->
 
-#### Language.createWord(key,min,max) => String
+### Language.createWord(key,min,max) => String
 
 <!-- div:left-panel -->
 
@@ -51,7 +51,7 @@ stores the word in "cache" to be used as subjects or nouns
 <!-- panels:start -->
 <!-- div:title-panel -->
 
-#### Language.createPhrase(key) => String
+### Language.createPhrase(key) => String
 
 <!-- div:left-panel -->
 
@@ -64,7 +64,7 @@ stores the word in "cache" to be used as subjects or nouns
 <!-- panels:start -->
 <!-- div:title-panel -->
 
-#### Language.translate(text) => Map<String, String>
+### Language.translate(text) => Map<String, String>
 
 <!-- div:left-panel -->
 
