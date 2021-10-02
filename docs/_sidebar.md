@@ -1,4 +1,5 @@
 - [Home](/)
+- [Quick Start](quickstart.md)
 - [API](api.md)
 - [Examples](examples.md)
 - [CHANGELOG](CHANGELOG.md)
