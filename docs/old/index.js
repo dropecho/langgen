@@ -18,16 +18,24 @@ function generate(seed) {
   var configtable = document.getElementById('config');
   configtable.innerHTML = '<thead><th>Config</th><th></th></thead>';
 
-  const addConfigRow = (name, data) =>
-    addTableRow(configtable, 2, { name, data });
+  const addConfigRow = (name, data, tooltip) =>
+    addTableRow(configtable, 2, { name, data }, tooltip);
 
   addConfigRow('Vowels', gen.config.vowels.join(' '));
   addConfigRow('Consonants', gen.config.consonants.join(' '));
   addConfigRow('Sibilants', gen.config.sibilants.join(' '));
   addConfigRow('Liquids', gen.config.liquids.join(' '));
   addConfigRow('Finals', gen.config.finals.join(' '));
-  addConfigRow('Syllable Structure', gen.config.syllable_structure);
-  addConfigRow('Phrase Structure', gen.config.phrase_structure);
+  addConfigRow(
+    'Syllable Structure',
+    gen.config.syllable_structure,
+    tooltips.syllable_structure
+  );
+  addConfigRow(
+    'Phrase Structure',
+    gen.config.phrase_structure,
+    tooltips.phrase_structure
+  );
   addConfigRow('min syllables in word', gen.config.word_length_min);
   addConfigRow('max syllables in word', gen.config.word_length_max);
 

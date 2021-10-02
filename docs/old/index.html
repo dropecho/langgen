@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script src="./data.js"></script>
+    <script src="./tooltips.js"></script>
+    <script src="./table.js"></script>
+    <script src="./langgen.js"></script>
+  </head>
+
+  <body>
+    <div class="row">
+      <button id="generate" onClick="createSeed()">Generate another</button>
+      <div id="langname"></div>
+    </div>
+    <div class="parent-grid">
+      <div id="phrases"></div>
+      <table id="words"></table>
+      <table id="config"></table>
+      <table id="ortho"></table>
+      <table id="rewrite"></table>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
