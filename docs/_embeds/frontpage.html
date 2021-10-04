@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script src="./langgen.js"></script>
+    <script>
+      const places = [
+        'town',
+        'castle',
+        'fortress',
+        'city',
+        'village',
+        'hamlet',
+        'harbor',
+        'mountain',
+        'abbey',
+        'valley',
+        'hills',
+        'peak',
+      ];
+      const colors = [
+        'golden',
+        'blue-black',
+        'violet',
+        'green',
+        'white',
+        'yellow',
+        'black',
+        'purple',
+        'red',
+        'blue',
+        'orange',
+        'silver',
+        'bronze',
+        'coppery',
+        'pink',
+        'obsidian',
+        'gray',
+      ];
+
+      function run() {
+        const language = new Language();
+        language.config.phrase_structure = 'DNS';
+
+        for (const place of places) {
+          language.createWord(place);
+        }
+
+        for (const color of colors) {
+          language.createWord(color);
+        }
+
+        var place = language.random.choice(places);
+        const phrase = language.createPhrase(place);
+        document.querySelector('#output').innerHTML = phrase;
+
+        const translated = phrase
+          .split(' ')
+          .map((x) => {
+            return Object.values(language.translate(x).h).join(' ');
+          })
+          .join(' ');
+
+        document.querySelector('#translated').innerHTML = translated;
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="row">
+      <button id="generate" onClick="run()">Run</button>
+    </div>
+
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div id="output">hi</div>
+      <div id="translated">hi</div>
+    </div>
+  </body>
+</html>
