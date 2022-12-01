@@ -4,7 +4,6 @@
 # -D dce=no
 -D js-es=6
 
--lib dropecho.interop
 -lib seedyrng
 # DEFINES / MACROS
 --macro include('', true, null, ['src'])
