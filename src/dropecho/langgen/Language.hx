@@ -132,13 +132,10 @@ class Language {
 	}
 
 	public function createPhrase(?key:String):String {
-		var subject = null;
-		if (key != null && words.exists(key)) {
-			subject = words.get(key);
-		} else {
-			subject = createWord();
-		}
+		var keyExists = key != null && words.exists(key);
+		var subject = keyExists ? words.get(key) : createWord();
 		var split = config.phrase_structure.split("");
+
 		var phrase = [
 			for (x in 0...split.length) {
 				if (split[x] == "?")
