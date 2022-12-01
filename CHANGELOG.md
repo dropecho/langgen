@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/dropecho/langgen/compare/0.6.1...0.6.2) (2022-12-01)
+
+
+### Bug Fixes
+
+* Misc cleanup. ([7681bc5](https://github.com/dropecho/langgen/commit/7681bc559bdc851935400c77e625830258f5dfab))
+* Remove interop dep for now. ([ba86587](https://github.com/dropecho/langgen/commit/ba865871fbdd0dac6e15018033a68ede73ea98ca))
+* Use shared workflow in dropecho/.github repo. ([7123045](https://github.com/dropecho/langgen/commit/71230456509df75e68007aec6d286fba9cb3bf98))
+
 ## [0.6.1](https://github.com/dropecho/langgen/compare/0.6.0...0.6.1) (2020-11-24)
 
 ### Bug Fixes
