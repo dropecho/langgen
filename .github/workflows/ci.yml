@@ -7,5 +7,5 @@ on:
       - main
 jobs:
   ci:
-    uses: dropecho/.github/shared-workflows/haxe/ci.yml@main
+    uses: dropecho/.github/.github/workflows/haxe/ci.yml@main
     secrets: inherit
