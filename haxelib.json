@@ -3,7 +3,9 @@
   "description": "A naming language generator.",
   "classPath": "src/",
   "dependencies": {
-    "seedyrng": ""
+    "seedyrng": "",
+    "genes": "",
+    "hxcs": ""
   },
   "url": "https://github.com/dropecho/storygen/",
   "contributors": [
