@@ -1,17 +1,11 @@
 ## JS
 
-# CODE PATH
--cp src
---macro include('', true, null, ['src'])
-
 # LIBRARIES
 -lib genes
 
 # DEFINES
--D dco=no
 -D js-es=6
 -D source-map-content
--D analyzer-optimize
 
 # OUTPUT 
 -js dist/js/esm/index.js 
