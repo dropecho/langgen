@@ -1,29 +1,7 @@
-## JS (node)
--cp src
--D dce=full
-# -D dce=no
--D js-es=6
-
--lib seedyrng
-# DEFINES / MACROS
---macro include('', true, null, ['src'])
-
-# OUTPUT 
--js dist/js/langgen.js 
-
-# --next
-
-## C#
-# -cp src
-# -D dce=no
-# -D dll_import
-# -D no-root
-# -D dll
-#
-# -lib seedyrng
-# # DEFINES / MACROS
-# # --macro addGlobalMetadata('*', '@:nativeGen')
-# --macro include('', true, null, ['src'])
-#
-# # OUTPUT
-# -cs dist/cs/langgen
+targets/js.hxml
+--next
+targets/js-esm.hxml
+--next
+targets/cs.hxml
+--next
+targets/docs.hxml

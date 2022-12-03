@@ -1,0 +1,5 @@
+## DOCS
+
+-cp src
+--macro include('', true, null, ['src'])
+-xml artifacts/docs.xml

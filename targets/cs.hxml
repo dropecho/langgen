@@ -1,0 +1,15 @@
+# C#
+
+# CODE PATH
+-cp src
+--macro include('', true, null, ['src'])
+
+# DEFINES
+-D dce=no
+-D dll_import
+-D no-root
+-D dll
+-D analyzer-optimize
+
+# OUTPUT
+-cs dist/cs/
