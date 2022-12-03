@@ -1,3 +1,10 @@
+## [0.6.4](https://github.com/dropecho/langgen/compare/0.6.3...0.6.4) (2022-12-03)
+
+
+### Bug Fixes
+
+* Fix test to CJS, update package json and etc. ([bae253c](https://github.com/dropecho/langgen/commit/bae253cab7d5d2f62d9e0f2170812d46c1a0b388))
+
 ## [0.6.3](https://github.com/dropecho/langgen/compare/0.6.2...0.6.3) (2022-12-03)
 
 
