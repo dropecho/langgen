@@ -1,3 +1,11 @@
+## [0.6.3](https://github.com/dropecho/langgen/compare/0.6.2...0.6.3) (2022-12-03)
+
+
+### Bug Fixes
+
+* Fix issues with updated build + cs. ([de0d476](https://github.com/dropecho/langgen/commit/de0d4761e0ae77af76f659af0c37781423300672))
+* Setup cs/esm/cjs targets, update releaserc to include c#. ([2090432](https://github.com/dropecho/langgen/commit/209043214090bd604583f99326daf19006270b18))
+
 ## [0.6.2](https://github.com/dropecho/langgen/compare/0.6.1...0.6.2) (2022-12-01)
 
 
