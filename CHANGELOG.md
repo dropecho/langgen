@@ -1,3 +1,10 @@
+## [0.6.5](https://github.com/dropecho/langgen/compare/0.6.4...0.6.5) (2022-12-04)
+
+
+### Bug Fixes
+
+* Fix issue with assemblyname in generated C# dlls causing conflicts when two haxe dlls included. ([0e25586](https://github.com/dropecho/langgen/commit/0e255860432c25bed57319ad160d5aa4fd043950))
+
 ## [0.6.4](https://github.com/dropecho/langgen/compare/0.6.3...0.6.4) (2022-12-03)
 
 
