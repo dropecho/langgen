@@ -6,4 +6,4 @@
 -D dll
 
 # OUTPUT
--cs dist/cs/
+-cs dist/cs/dropecho.langgen
