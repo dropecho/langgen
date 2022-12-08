@@ -63,7 +63,8 @@
         "assets": [
           "*.md",
           "package.json",
-          "haxelib.json"
+          "haxelib.json",
+          "docs"
         ]
       }
     ]
