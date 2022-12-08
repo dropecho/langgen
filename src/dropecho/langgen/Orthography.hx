@@ -1,13 +1,13 @@
 package dropecho.langgen;
 
 import seedyrng.Random;
-import dropecho.langgen.Language.LanguageOrthography;
+import dropecho.langgen.Language.Graphemes;
 
-@:expose("Spell")
-class Spell {
-	public var ortho:LanguageOrthography;
+@:expose("Orthography")
+class Orthography {
+	public var ortho:Graphemes;
 
-	public function new(?ortho:LanguageOrthography, ?seed:String) {
+	public function new(?ortho:Graphemes, ?seed:String) {
 		var random = new Random();
 		if (seed != null) {
 			random.setStringSeed(seed);

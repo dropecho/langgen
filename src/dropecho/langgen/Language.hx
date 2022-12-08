@@ -3,7 +3,7 @@ package dropecho.langgen;
 import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
-import dropecho.langgen.Spell;
+import dropecho.langgen.Orthography;
 import dropecho.langgen.Rewrite;
 
 using StringTools;
@@ -26,7 +26,7 @@ typedef LanguageConfig = {
 }
 
 // "Spelling, i.e. the written script".
-typedef LanguageOrthography = {
+typedef Graphemes = {
 	var consonants:Map<String, String>;
 	var vowels:Map<String, String>;
 }
@@ -34,7 +34,7 @@ typedef LanguageOrthography = {
 @:expose("Language")
 class Language {
 	public var random:Random;
-	public var spell:Spell;
+	public var orthography:Orthography;
 	public var rewrite:Rewrite;
 
 	public var config:LanguageConfig;
@@ -47,9 +47,10 @@ class Language {
 	public var genitive:String;
 	public var definite:String;
 
-	public function new(?config:LanguageConfig, ?seed:String) {
+	public function new(?config:LanguageConfig, ?seed:String = "") {
 		this.random = new Random();
-		if (seed != null) {
+		if (seed != null && seed != "") {
+			seed = Std.string(seed).split('.')[0];
 			this.random.setStringSeed(seed);
 		}
 		var randommin:Int;
@@ -67,7 +68,7 @@ class Language {
 			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
 		};
 
-		spell = new Spell(null, seed);
+		orthography = new Orthography(null, seed);
 		rewrite = new Rewrite(this.config);
 
 		// TODO: Extract this to something else.
@@ -120,7 +121,7 @@ class Language {
 		var word = [for (_ in 0...random.randomInt(min, max)) createSyllable()].join("");
 
 		var orig = word;
-		word = spell.spell(rewrite.rewrite(word));
+		word = orthography.spell(rewrite.rewrite(word));
 
 		if (key != null && !words.exists(key)) {
 			words.set(key, word);
