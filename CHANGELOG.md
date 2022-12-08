@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/dropecho/langgen/compare/0.6.5...0.7.0) (2022-12-08)
+
+
+### Features
+
+* Misc cleanup, cleanup docs, fix some seed issues. ([e208eb8](https://github.com/dropecho/langgen/commit/e208eb80b985189f8c3d2f4e456b633793b36c36))
+
 ## [0.6.5](https://github.com/dropecho/langgen/compare/0.6.4...0.6.5) (2022-12-04)
 
 
