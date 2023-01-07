@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/dropecho/langgen/compare/0.7.0...0.7.1) (2023-01-07)
+
+
+### Bug Fixes
+
+* Add types and dts output to js. ([2ba5d44](https://github.com/dropecho/langgen/commit/2ba5d44896983b94269c81bf6728c15f5ca5750e))
+
 # [0.7.0](https://github.com/dropecho/langgen/compare/0.6.5...0.7.0) (2022-12-08)
 
 
