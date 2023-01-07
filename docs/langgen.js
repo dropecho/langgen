@@ -184,7 +184,6 @@ class dropecho_langgen_Language {
 		this.words_ipa = new haxe_ds_StringMap();
 		this.words = new haxe_ds_StringMap();
 		this.syllables = [];
-		console.log("src/dropecho/langgen/Language.hx:51:",seedyrng_Random.randomSystemInt());
 		this.random = new seedyrng_Random();
 		if(seed != null && seed != "") {
 			seed = (seed == null ? "null" : "" + seed).split(".")[0];

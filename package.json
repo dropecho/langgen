@@ -4,11 +4,19 @@
   "description": "",
   "author": "vantreeseba <vantreeseba@gmail.com>",
   "repository": "github:dropecho/langgen",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist/js/**/*"
   ],
-  "license": "MIT",
+  "types": "dist/js/esm/index.d.ts",
+  "main": "./dist/js/cjs/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/js/cjs/index.cjs",
+      "import": "./dist/js/esm/index.js"
+    }
+  },
   "scripts": {
     "build": "haxe build.hxml && npm run docs:cp_js",
     "docs:cp_js": "cp dist/js/cjs/index.cjs docs/langgen.js",
@@ -25,12 +33,5 @@
     "@semantic-release/release-notes-generator": "^10.0.3",
     "semantic-release": "^19.0.5",
     "semantic-release-haxelib": "^1.1.0"
-  },
-  "main": "./dist/js/cjs/index.cjs",
-  "exports": {
-    ".": {
-      "require": "./dist/js/cjs/index.cjs",
-      "import": "./dist/js/esm/index.js"
-    }
   }
 }
