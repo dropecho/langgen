@@ -4,6 +4,7 @@ import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
 import dropecho.langgen.Orthography;
+import dropecho.langgen.Orthography.Graphemes;
 import dropecho.langgen.Rewrite;
 import dropecho.langgen.Rewrite.RewriteRule;
 
@@ -24,12 +25,6 @@ typedef LanguageConfig = {
 	var phrase_structure:String;
 	var word_length_min:Int;
 	var word_length_max:Int;
-}
-
-// "Spelling, i.e. the written script".
-typedef Graphemes = {
-	var consonants:Map<String, String>;
-	var vowels:Map<String, String>;
 }
 
 @:expose("Language")
