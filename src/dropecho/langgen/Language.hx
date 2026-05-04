@@ -166,7 +166,7 @@ class Language {
 		return phrase;
 	}
 
-	public function translate(text:String) {
+	public function translate(text:String):Map<String, String> {
 		var tokens = text.trim().split(" ");
 
 		return [
