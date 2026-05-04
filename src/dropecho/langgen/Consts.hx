@@ -1,6 +1,7 @@
 package dropecho.langgen;
 
 import seedyrng.Random;
+import dropecho.langgen.Rewrite.RewriteRule;
 
 @:expose("Consts")
 class Consts {
@@ -89,7 +90,7 @@ class Consts {
 		'Doubles' => ['A' => 'aa', 'E' => 'ee', 'I' => 'ii', 'O' => 'oo', 'U' => 'uu']
 	];
 
-	static public var rewritesets = [
+	static public var rewritesets:Map<String, Array<RewriteRule>> = [
 		'None' => [],
 		'No double sounds' => [{character: "", rule: "(.)\\1", replaceWith: "$1"}],
 		'No vowels at end' => [{character: "", rule: "V$", replaceWith: ""}],

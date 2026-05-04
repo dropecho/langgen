@@ -2,6 +2,12 @@ package dropecho.langgen;
 
 import dropecho.langgen.Language.LanguageConfig;
 
+typedef RewriteRule = {
+	var character:String;
+	var rule:String;
+	var replaceWith:String;
+}
+
 class Rewrite {
 	public var rules:Map<EReg, String> = new Map<EReg, String>();
 	public var config:LanguageConfig;

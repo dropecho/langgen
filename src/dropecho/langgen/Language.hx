@@ -5,6 +5,7 @@ import seedyrng.Random;
 import dropecho.langgen.Consts;
 import dropecho.langgen.Orthography;
 import dropecho.langgen.Rewrite;
+import dropecho.langgen.Rewrite.RewriteRule;
 
 using StringTools;
 
@@ -16,7 +17,7 @@ typedef LanguageConfig = {
 	var liquids:Array<String>;
 	var sibilants:Array<String>;
 	var finals:Array<String>;
-	var rewriteset:Array<Dynamic>;
+	var rewriteset:Array<RewriteRule>;
 
 	// Structures
 	var syllable_structure:String;
@@ -80,11 +81,9 @@ class Language {
 		var split = config.syllable_structure.split("");
 		var syl = [
 			for (x in 0...split.length) {
-				if (split[x] == "?")
-					continue;
+				if (split[x] == "?") continue;
 
-				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5)
-					continue;
+				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5) continue;
 
 				switch (split[x]) {
 					case "C":
@@ -139,11 +138,9 @@ class Language {
 
 		var phrase = [
 			for (x in 0...split.length) {
-				if (split[x] == "?")
-					continue;
+				if (split[x] == "?") continue;
 
-				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5)
-					continue;
+				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5) continue;
 
 				switch (split[x]) {
 					case "D":
