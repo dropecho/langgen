@@ -49,20 +49,22 @@ class Language {
 			seed = Std.string(seed).split('.')[0];
 			this.random.setStringSeed(seed);
 		}
-		var randommin:Int;
-
-		this.config = config != null ? config : {
-			consonants: Consts.getRandomConsonantSet(random),
-			vowels: Consts.getRandomVowelSet(random),
-			syllable_structure: Consts.getRandomSyllableStructure(random),
-			phrase_structure: Consts.getRandomPhraseStructure(random),
-			sibilants: Consts.getRandomSibilantSet(random),
-			liquids: Consts.getRandomLiquidSet(random),
-			finals: Consts.getRandomFinalSet(random),
-			rewriteset: Consts.getRandomRewriteSet(random),
-			word_length_min: randommin = random.randomInt(1, 2),
-			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
-		};
+		if (config == null) {
+			var randommin = random.randomInt(1, 2);
+			config = {
+				consonants: Consts.getRandomConsonantSet(random),
+				vowels: Consts.getRandomVowelSet(random),
+				syllable_structure: Consts.getRandomSyllableStructure(random),
+				phrase_structure: Consts.getRandomPhraseStructure(random),
+				sibilants: Consts.getRandomSibilantSet(random),
+				liquids: Consts.getRandomLiquidSet(random),
+				finals: Consts.getRandomFinalSet(random),
+				rewriteset: Consts.getRandomRewriteSet(random),
+				word_length_min: randommin,
+				word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
+			};
+		}
+		this.config = config;
 
 		orthography = new Orthography(null, seed);
 		rewrite = new Rewrite(this.config);
