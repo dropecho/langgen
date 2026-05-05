@@ -197,4 +197,29 @@ class RewriteTest {
 
 		Assert.areEqual(expected, after);
 	}
+
+	@Test
+	public function parseRuleConsonantClass() {
+		var out = rewriter.parseRule('d', 'C_');
+
+		Assert.areEqual('[ptkmnls](d)', out);
+	}
+
+	@Test
+	public function multipleRulesApplyInSequence() {
+		rewriter.addRule("d", "_V", "de");
+		rewriter.addRule("g", "_V", "ge");
+
+		var after = rewriter.rewrite('dagi');
+
+		Assert.areEqual('dege', after);
+	}
+
+	@Test
+	public function emptyRewritesetIsNoop() {
+		var before = 'hello';
+		var after = rewriter.rewrite(before);
+
+		Assert.areEqual(before, after);
+	}
 }
