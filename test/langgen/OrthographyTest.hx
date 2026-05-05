@@ -6,8 +6,8 @@ import dropecho.langgen.*;
 class OrthographyTest {
 	public var orthography:Orthography;
 
-	@BeforeClass
-	public function suiteSetup() {
+	@Before
+	public function setup() {
 		orthography = new Orthography({
 			consonants: Consts.corthsets['Default'],
 			vowels: Consts.vorthsets['Default'],
