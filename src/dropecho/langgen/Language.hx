@@ -143,7 +143,7 @@ class Language {
 					case "G":
 						genitive;
 					case "N":
-						var choices = [for (k in words.keys()) k].filter(x -> x != "the" && x != "of");
+						var choices = [for (k in words.keys()) k].filter(x -> words.get(x) != genitive && words.get(x) != definite);
 						// if (this.random.random() > 0.2 && choices.length > 0) {
 						if (choices.length > 0) {
 							words.get(random.choice(choices));
