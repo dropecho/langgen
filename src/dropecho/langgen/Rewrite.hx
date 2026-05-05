@@ -24,8 +24,8 @@ class Rewrite {
 		var consts = config.consonants.join("");
 		var vowels = config.vowels.join("");
 
-		rule = ~/C/g.replace(rule, '[$consts]{1}');
-		rule = ~/V/g.replace(rule, '[$vowels]{1}');
+		rule = ~/C/g.replace(rule, '[$consts]');
+		rule = ~/V/g.replace(rule, '[$vowels]');
 		rule = ~/_/g.replace(rule, '($char)');
 
 		return rule;
