@@ -4,7 +4,9 @@ import haxe.ds.StringMap;
 import seedyrng.Random;
 import dropecho.langgen.Consts;
 import dropecho.langgen.Orthography;
+import dropecho.langgen.Orthography.Graphemes;
 import dropecho.langgen.Rewrite;
+import dropecho.langgen.Rewrite.RewriteRule;
 
 using StringTools;
 
@@ -16,19 +18,13 @@ typedef LanguageConfig = {
 	var liquids:Array<String>;
 	var sibilants:Array<String>;
 	var finals:Array<String>;
-	var rewriteset:Array<Dynamic>;
+	var rewriteset:Array<RewriteRule>;
 
 	// Structures
 	var syllable_structure:String;
 	var phrase_structure:String;
 	var word_length_min:Int;
 	var word_length_max:Int;
-}
-
-// "Spelling, i.e. the written script".
-typedef Graphemes = {
-	var consonants:Map<String, String>;
-	var vowels:Map<String, String>;
 }
 
 @:expose("Language")
@@ -53,20 +49,22 @@ class Language {
 			seed = Std.string(seed).split('.')[0];
 			this.random.setStringSeed(seed);
 		}
-		var randommin:Int;
-
-		this.config = config != null ? config : {
-			consonants: Consts.getRandomConsonantSet(random),
-			vowels: Consts.getRandomVowelSet(random),
-			syllable_structure: Consts.getRandomSyllableStructure(random),
-			phrase_structure: Consts.getRandomPhraseStructure(random),
-			sibilants: Consts.getRandomSibilantSet(random),
-			liquids: Consts.getRandomLiquidSet(random),
-			finals: Consts.getRandomFinalSet(random),
-			rewriteset: Consts.getRandomRewriteSet(random),
-			word_length_min: randommin = random.randomInt(1, 2),
-			word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
-		};
+		if (config == null) {
+			var randommin = random.randomInt(1, 2);
+			config = {
+				consonants: Consts.getRandomConsonantSet(random),
+				vowels: Consts.getRandomVowelSet(random),
+				syllable_structure: Consts.getRandomSyllableStructure(random),
+				phrase_structure: Consts.getRandomPhraseStructure(random),
+				sibilants: Consts.getRandomSibilantSet(random),
+				liquids: Consts.getRandomLiquidSet(random),
+				finals: Consts.getRandomFinalSet(random),
+				rewriteset: Consts.getRandomRewriteSet(random),
+				word_length_min: randommin,
+				word_length_max: random.randomInt(randommin + 1, randommin + random.randomInt(1, 4))
+			};
+		}
+		this.config = config;
 
 		orthography = new Orthography(null, seed);
 		rewrite = new Rewrite(this.config);
@@ -80,11 +78,9 @@ class Language {
 		var split = config.syllable_structure.split("");
 		var syl = [
 			for (x in 0...split.length) {
-				if (split[x] == "?")
-					continue;
+				if (split[x] == "?") continue;
 
-				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5)
-					continue;
+				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5) continue;
 
 				switch (split[x]) {
 					case "C":
@@ -139,11 +135,9 @@ class Language {
 
 		var phrase = [
 			for (x in 0...split.length) {
-				if (split[x] == "?")
-					continue;
+				if (split[x] == "?") continue;
 
-				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5)
-					continue;
+				if (x < split.length - 1 && split[x + 1] == "?" && random.random() > 0.5) continue;
 
 				switch (split[x]) {
 					case "D":
@@ -151,7 +145,7 @@ class Language {
 					case "G":
 						genitive;
 					case "N":
-						var choices = [for (k in words.keys()) k].filter(x -> x != "the" && x != "of");
+						var choices = [for (k in words.keys()) k].filter(x -> words.get(x) != genitive && words.get(x) != definite);
 						// if (this.random.random() > 0.2 && choices.length > 0) {
 						if (choices.length > 0) {
 							words.get(random.choice(choices));
@@ -169,7 +163,7 @@ class Language {
 		return phrase;
 	}
 
-	public function translate(text:String) {
+	public function translate(text:String):Map<String, String> {
 		var tokens = text.trim().split(" ");
 
 		return [

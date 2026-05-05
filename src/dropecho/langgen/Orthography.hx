@@ -1,7 +1,11 @@
 package dropecho.langgen;
 
 import seedyrng.Random;
-import dropecho.langgen.Language.Graphemes;
+
+typedef Graphemes = {
+	var consonants:Map<String, String>;
+	var vowels:Map<String, String>;
+}
 
 @:expose("Orthography")
 class Orthography {

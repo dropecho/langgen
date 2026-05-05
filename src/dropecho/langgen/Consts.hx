@@ -1,6 +1,7 @@
 package dropecho.langgen;
 
 import seedyrng.Random;
+import dropecho.langgen.Rewrite.RewriteRule;
 
 @:expose("Consts")
 class Consts {
@@ -89,49 +90,47 @@ class Consts {
 		'Doubles' => ['A' => 'aa', 'E' => 'ee', 'I' => 'ii', 'O' => 'oo', 'U' => 'uu']
 	];
 
-	static public var rewritesets = [
+	static public var rewritesets:Map<String, Array<RewriteRule>> = [
 		'None' => [],
 		'No double sounds' => [{character: "", rule: "(.)\\1", replaceWith: "$1"}],
 		'No vowels at end' => [{character: "", rule: "V$", replaceWith: ""}],
 		'No u followed by vowels' => [{character: "u", rule: "_V", replaceWith: ""}],
 	];
 
+	static function randomFromMap<V>(map:Map<String, V>, random:Random):V {
+		return map[random.choice([for (k in map.keys()) k])];
+	}
+
 	public static function getRandomCorthSet(random:Random) {
-		return corthsets.get(random.choice([for (k in corthsets.keys()) k]));
+		return randomFromMap(corthsets, random);
 	}
 
 	public static function getRandomVorthSet(random:Random) {
-		return vorthsets.get(random.choice([for (k in vorthsets.keys()) k]));
+		return randomFromMap(vorthsets, random);
 	}
 
 	public static function getRandomConsonantSet(random:Random) {
-		var keys = [for (x in consonant_sets.keys()) x];
-		return consonant_sets[random.choice(keys)];
+		return randomFromMap(consonant_sets, random);
 	}
 
 	public static function getRandomVowelSet(random:Random) {
-		var keys = [for (x in vowel_sets.keys()) x];
-		return vowel_sets[random.choice(keys)];
+		return randomFromMap(vowel_sets, random);
 	}
 
 	public static function getRandomSibilantSet(random:Random) {
-		var keys = [for (x in sibilant_sets.keys()) x];
-		return sibilant_sets[random.choice(keys)];
+		return randomFromMap(sibilant_sets, random);
 	}
 
 	public static function getRandomFinalSet(random:Random) {
-		var keys = [for (x in final_sets.keys()) x];
-		return final_sets[random.choice(keys)];
+		return randomFromMap(final_sets, random);
 	}
 
 	public static function getRandomLiquidSet(random:Random) {
-		var keys = [for (x in liquid_sets.keys()) x];
-		return liquid_sets[random.choice(keys)];
+		return randomFromMap(liquid_sets, random);
 	}
 
 	public static function getRandomRewriteSet(random:Random) {
-		var keys = [for (x in rewritesets.keys()) x];
-		return rewritesets[random.choice(keys)];
+		return randomFromMap(rewritesets, random);
 	}
 
 	public static function getRandomSyllableStructure(random:Random) {

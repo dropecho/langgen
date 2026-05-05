@@ -32,7 +32,7 @@ class RewriteTest {
 	@Test
 	public function parseRuleConsonant() {
 		var test = '_C';
-		var expected = '(d)[ptkmnls]{1}';
+		var expected = '(d)[ptkmnls]';
 
 		var out = rewriter.parseRule('d', test);
 
@@ -42,7 +42,7 @@ class RewriteTest {
 	@Test
 	public function parseRulePostFix() {
 		var test = '_V';
-		var expected = '(d)[aeiou]{1}';
+		var expected = '(d)[aeiou]';
 
 		var out = rewriter.parseRule('d', test);
 
@@ -52,7 +52,7 @@ class RewriteTest {
 	@Test
 	public function parseRulePostFixMultiple() {
 		var test = '_VV';
-		var expected = '(d)[aeiou]{1}[aeiou]{1}';
+		var expected = '(d)[aeiou][aeiou]';
 
 		var out = rewriter.parseRule('d', test);
 
@@ -62,7 +62,7 @@ class RewriteTest {
 	@Test
 	public function parseRulePreFix() {
 		var test = 'V_';
-		var expected = '[aeiou]{1}(d)';
+		var expected = '[aeiou](d)';
 
 		var out = rewriter.parseRule('d', test);
 
@@ -196,5 +196,30 @@ class RewriteTest {
 		var after = rewriter.rewrite(before);
 
 		Assert.areEqual(expected, after);
+	}
+
+	@Test
+	public function parseRuleConsonantClass() {
+		var out = rewriter.parseRule('d', 'C_');
+
+		Assert.areEqual('[ptkmnls](d)', out);
+	}
+
+	@Test
+	public function multipleRulesApplyInSequence() {
+		rewriter.addRule("d", "_V", "de");
+		rewriter.addRule("g", "_V", "ge");
+
+		var after = rewriter.rewrite('dagi');
+
+		Assert.areEqual('dege', after);
+	}
+
+	@Test
+	public function emptyRewritesetIsNoop() {
+		var before = 'hello';
+		var after = rewriter.rewrite(before);
+
+		Assert.areEqual(before, after);
 	}
 }

@@ -6,8 +6,8 @@ import dropecho.langgen.*;
 class OrthographyTest {
 	public var orthography:Orthography;
 
-	@BeforeClass
-	public function suiteSetup() {
+	@Before
+	public function setup() {
 		orthography = new Orthography({
 			consonants: Consts.corthsets['Default'],
 			vowels: Consts.vorthsets['Default'],
@@ -39,5 +39,20 @@ class OrthographyTest {
 		var expected = "ash";
 
 		Assert.areEqual(expected, after);
+	}
+
+	@Test
+	public function spellingWithNoOverrideIsPassthrough() {
+		var result = orthography.spell("abc");
+
+		Assert.areEqual("abc", result);
+	}
+
+	@Test
+	public function seededOrthographyIsDeterministic() {
+		var o1 = new Orthography(null, "42");
+		var o2 = new Orthography(null, "42");
+
+		Assert.areEqual(o1.spell("aʃ"), o2.spell("aʃ"));
 	}
 }

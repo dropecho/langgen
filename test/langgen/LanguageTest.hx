@@ -1,7 +1,7 @@
 package langgen;
 
-import massive.munit.Assert;
 import dropecho.langgen.*;
+import massive.munit.Assert;
 
 class LanguageTest {
 	public var language:Language;
@@ -40,6 +40,14 @@ class LanguageTest {
 	}
 
 	@Test
+	public function seededLanguageIsDeterministic() {
+		var lang1 = new Language(null, "42");
+		var lang2 = new Language(null, "42");
+
+		Assert.areEqual(lang1.createWord(), lang2.createWord());
+	}
+
+	@Test
 	public function createPhrase() {
 		var phrase = language.createPhrase();
 
@@ -51,15 +59,22 @@ class LanguageTest {
 		var word = language.createWord("city");
 		var phrase = language.createPhrase("city");
 
-		Assert.isNotNull(phrase);
+		Assert.isTrue(phrase.indexOf(word) >= 0);
 	}
 
 	@Test
-	public function createPhraseWithKeyAgain() {
+	public function translateKnownWordReturnsKey() {
 		var word = language.createWord("city");
-		var phrase = language.createPhrase("city");
+		var translated = language.translate(word);
 
-		Assert.isNotNull(phrase);
+		Assert.areEqual("city", translated.get(word));
+	}
+
+	@Test
+	public function translateUnknownWordReturnsUnknown() {
+		var translated = language.translate("zzznomatch");
+
+		Assert.areEqual("UNKNOWN", translated.get("zzznomatch"));
 	}
 
 	@Test
